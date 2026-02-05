@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virginia Wine Country Insider's Guide | TNT Limousine</title>
+    <meta name="description" content="Get the complete insider's guide to Virginia wine country with 24 wineries, 5 curated itineraries, and local tips from TNT Limousine's experienced chauffeurs.">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333333;
+            background: #ffffff;
+        }
+
+        /* ========== HEADER ========== */
+        .header {
+            background: #2d2d2d;
+            border-bottom: 3px solid #CC0000;
+            padding: 20px 0;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo-container {
+            flex: 0 0 auto;
+        }
+
+        .logo-container img {
+            height: 80px;
+            width: auto;
+        }
+
+        .header-badges {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .badge {
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.2);
+            padding: 8px 16px;
+            border-radius: 4px;
+            font-size: 0.9em;
+            white-space: nowrap;
+            color: #e0e0e0;
+        }
+
+        .badge strong {
+            color: #ffffff;
+        }
+
+        /* ========== HERO ========== */
+        .hero {
+            position: relative;
+            background: linear-gradient(rgba(255,255,255,0.15), rgba(0,0,0,0.45)), url('images/wine-tour-hero.jpg') center/cover;
+            padding: 100px 20px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+            color: #ffffff;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+            font-weight: 700;
+        }
+
+        .hero .subtitle {
+            font-size: 1.4em;
+            color: #f0f0f0;
+            margin-bottom: 35px;
+            text-shadow: 0 1px 4px rgba(0,0,0,0.4);
+            letter-spacing: 0.5px;
+        }
+
+        .hero-cta {
+            display: inline-block;
+            padding: 16px 44px;
+            background: #CC0000;
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 1.15em;
+            font-weight: 600;
+            transition: background 0.3s, box-shadow 0.3s;
+        }
+
+        .hero-cta:hover {
+            background: #a30000;
+            box-shadow: 0 4px 16px rgba(204, 0, 0, 0.35);
+        }
+
+        /* ========== CONTAINER ========== */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* ========== VALUE SECTION ========== */
+        .value-section {
+            background: #f8f8f8;
+            border-radius: 8px;
+            padding: 60px 40px;
+            margin: 40px 0;
+            text-align: center;
+            border: 1px solid #e5e5e5;
+        }
+
+        .value-section h2 {
+            font-size: 2.4em;
+            margin-bottom: 20px;
+            color: #111111;
+            font-weight: 700;
+        }
+
+        .value-section p {
+            font-size: 1.15em;
+            color: #555555;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        .value-section .value-highlight {
+            margin-top: 1.5rem;
+            line-height: 2;
+            font-size: 1.1em;
+            color: #444444;
+        }
+
+        .value-section .value-closing {
+            margin-top: 1.5rem;
+            color: #555555;
+        }
+
+        .value-section .value-tagline {
+            margin-top: 1rem;
+            font-size: 1.05em;
+            color: #CC0000;
+            font-weight: 600;
+        }
+
+        /* ========== PHOTO GALLERY ========== */
+        .photo-gallery {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin: 40px auto;
+            max-width: 1000px;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+            transition: box-shadow 0.3s, transform 0.2s;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* ========== TESTIMONIAL ========== */
+        .testimonial {
+            background: #fafafa;
+            border-left: 4px solid #CC0000;
+            padding: 30px;
+            margin: 40px 0;
+            border-radius: 4px;
+        }
+
+        .testimonial-text {
+            font-size: 1.1em;
+            font-style: italic;
+            color: #444444;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .testimonial-author {
+            color: #CC0000;
+            font-weight: 600;
+            font-size: 1.1em;
+        }
+
+        /* ========== FEATURE LIST ========== */
+        .feature-list {
+            margin: 40px 0;
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+        }
+
+        .feature-list h3 {
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            color: #111111;
+        }
+
+        .feature-list ul {
+            list-style: none;
+        }
+
+        .feature-list li {
+            padding: 12px 0;
+            padding-left: 30px;
+            position: relative;
+            color: #444444;
+            font-size: 1.05em;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .feature-list li:last-child {
+            border-bottom: none;
+        }
+
+        .feature-list li:before {
+            content: "\2713";
+            position: absolute;
+            left: 0;
+            color: #CC0000;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        .feature-list li strong {
+            color: #222222;
+        }
+
+        /* ========== FORM SECTION ========== */
+        .form-section {
+            background: #f0f0f0;
+            padding: 40px;
+            border-radius: 8px;
+            margin: 40px 0;
+            border: 1px solid #ddd;
+        }
+
+        .form-section h2 {
+            text-align: center;
+            margin-bottom: 10px;
+            color: #111111;
+            font-size: 2em;
+        }
+
+        .form-section .form-intro {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #666666;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333333;
+        }
+
+        .form-group label .required {
+            color: #CC0000;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            background: #ffffff;
+            color: #333333;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #CC0000;
+            box-shadow: 0 0 0 2px rgba(204, 0, 0, 0.08);
+        }
+
+        .form-group input::placeholder {
+            color: #aaaaaa;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            font-weight: 400;
+            color: #444444;
+        }
+
+        .checkbox-label input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: #CC0000;
+            flex-shrink: 0;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 18px;
+            background: #CC0000;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.15em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s, box-shadow 0.3s;
+        }
+
+        .submit-btn:hover {
+            background: #a30000;
+            box-shadow: 0 4px 16px rgba(204, 0, 0, 0.3);
+        }
+
+        .trust-badge {
+            text-align: center;
+            margin-top: 20px;
+            padding: 15px;
+            background: #ffffff;
+            border-radius: 5px;
+            color: #888888;
+            font-size: 0.9em;
+            border: 1px solid #e8e8e8;
+        }
+
+        /* ========== SIDEBAR LINK ========== */
+        .sidebar-link {
+            position: fixed;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #ffffff;
+            border: 1px solid #ddd;
+            padding: 15px 20px;
+            border-radius: 8px;
+            text-align: center;
+            z-index: 1000;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+
+        .sidebar-link a {
+            color: #CC0000;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95em;
+        }
+
+        .sidebar-link a:hover {
+            color: #a30000;
+        }
+
+        .sidebar-link p {
+            color: #888888;
+            font-size: 0.85em;
+            margin-top: 5px;
+        }
+
+        /* ========== CTA BANNER ========== */
+        .cta-banner {
+            background: #f8f8f8;
+            border: 1px solid #e0e0e0;
+            padding: 50px 40px;
+            border-radius: 8px;
+            text-align: center;
+            margin: 60px 0 40px 0;
+        }
+
+        .cta-banner h3 {
+            font-size: 2em;
+            margin-bottom: 15px;
+            color: #111111;
+        }
+
+        .cta-banner p {
+            font-size: 1.15em;
+            margin-bottom: 30px;
+            color: #555555;
+        }
+
+        .cta-banner a {
+            display: inline-block;
+            padding: 18px 50px;
+            background: #CC0000;
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 700;
+            font-size: 1.2em;
+            letter-spacing: 0.5px;
+            transition: background 0.3s, box-shadow 0.3s;
+        }
+
+        .cta-banner a:hover {
+            background: #a30000;
+            box-shadow: 0 4px 16px rgba(204, 0, 0, 0.3);
+        }
+
+        .cta-banner .cta-note {
+            margin-top: 20px;
+            font-size: 0.9em;
+            color: #888888;
+            font-weight: 400;
+        }
+
+        /* ========== FOOTER ========== */
+        .footer-about {
+            text-align: center;
+            margin-top: 60px;
+            padding: 40px;
+            border-top: 1px solid #e0e0e0;
+            color: #777777;
+        }
+
+        .footer-about h3 {
+            color: #111111;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+
+        .footer-about p {
+            line-height: 1.8;
+            max-width: 800px;
+            margin: 0 auto 20px;
+        }
+
+        .footer-links {
+            margin-top: 20px;
+        }
+
+        .footer-links a {
+            color: #CC0000;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: 600;
+        }
+
+        .footer-links a:hover {
+            color: #a30000;
+        }
+
+        /* ========== RESPONSIVE ========== */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2em;
+            }
+
+            .hero .subtitle {
+                font-size: 1.1em;
+            }
+
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .header-badges {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .photo-gallery {
+                grid-template-columns: 1fr;
+                max-width: 100%;
+            }
+
+            .sidebar-link {
+                position: static;
+                transform: none;
+                margin: 20px;
+                display: block;
+            }
+
+            .value-section {
+                padding: 40px 20px;
+            }
+
+            .value-section h2 {
+                font-size: 1.8em;
+            }
+
+            .cta-banner {
+                padding: 40px 20px;
+            }
+
+            .cta-banner h3 {
+                font-size: 1.5em;
+            }
+
+            .feature-list {
+                padding: 30px 20px;
+            }
+
+            .form-section {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <div class="header-content">
+            <div class="logo-container">
+                <!-- INSTRUCTION: Replace with actual TNT logo -->
+                <img src="images/tnt-logo.png" alt="TNT Limousine">
+            </div>
+            <div class="header-badges">
+                <div class="badge"><strong>25+</strong> Years Experience</div>
+                <div class="badge"><strong>Locally Owned</strong> &amp; Operated</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <div class="hero">
+        <!-- Background image: images/wine-tour-hero.jpg -->
+        <h1>Virginia Wine Country Insider's Guide</h1>
+        <p class="subtitle">24 Wineries &middot; 5 Curated Itineraries &middot; Local Insider Tips</p>
+        <a href="#form" class="hero-cta">Get Your Free Guide</a>
+    </div>
+
+    <div class="container">
+        <!-- Value Proposition -->
+        <div class="value-section">
+            <h2>The 5-Star Wine Country Experience</h2>
+            <p>
+                Forget arguing over who has to be the designated driver. Forget watching everyone else enjoy the tastings while you sip water.
+            </p>
+            <p class="value-highlight">
+                Luxury transport with plush leather seating.<br>
+                Your own professional chauffeur who knows the back roads.<br>
+                Every stop, every pour, every vineyard view — fully enjoyed.<br>
+                No GPS fumbling between wineries, no parking lot stress.<br>
+                You're in the group photos, glass in hand, actually present.
+            </p>
+            <p class="value-closing">
+                While our driver handles the route, the rural roads, and the winery parking, you're tasting. Toasting. Discovering your new favorite vintage. Actually savoring wine country instead of stressing about getting everyone home safe.
+            </p>
+            <p class="value-tagline">
+                The premium wine tour experience trusted by groups across Central Virginia.
+            </p>
+        </div>
+
+        <!-- Photo Gallery -->
+        <div class="photo-gallery">
+            <div class="gallery-item">
+                <!-- INSTRUCTION: Place actual image file here -->
+                <img src="images/wine-tour-1.jpg" alt="Virginia vineyard rows at sunset">
+            </div>
+            <div class="gallery-item">
+                <img src="images/wine-tour-2.jpg" alt="Wine tasting at a Virginia winery barrel room">
+            </div>
+            <div class="gallery-item">
+                <img src="images/wine-tour-3.jpg" alt="Group enjoying wine on a winery terrace">
+            </div>
+            <div class="gallery-item">
+                <img src="images/wine-tour-4.jpg" alt="Scenic Virginia wine country rolling hills">
+            </div>
+        </div>
+
+        <!-- Customer Testimonial -->
+        <div class="testimonial">
+            <p class="testimonial-text">
+                "We had an amazing and very personalized experience. From making the arrangements to delivering us back to our front door...this was the BEST service ever. TNT made sure we were provided the flexibility and top notch, professional service the entire time. They did whatever to accommodate our group and I think that deserves a gold star. We loved every bit of our time and would highly recommend TNT! They showed they truly go over and beyond."
+            </p>
+            <p class="testimonial-author">&mdash; Kim</p>
+        </div>
+
+        <!-- What's Included -->
+        <div class="feature-list">
+            <h3>What's Included in Your Free Guide:</h3>
+            <ul>
+                <li><strong>Interactive Winery Map:</strong> All 24 wineries with directions, hours, and tasting fees</li>
+                <li><strong>5 Curated Itineraries:</strong> Half-day, full-day, romantic, group, and scenic routes planned out for you</li>
+                <li><strong>Winery Profiles:</strong> Tasting menus, signature wines, food pairings, and reservation info</li>
+                <li><strong>Insider Tips from TNT Drivers:</strong> Best times to visit, hidden gems, and routes that avoid traffic</li>
+                <li><strong>Seasonal Planning Guide:</strong> What to expect in spring, summer, fall, and winter at Virginia wineries</li>
+                <li><strong>Group Planning &amp; Vehicle Guide:</strong> Which TNT vehicles fit your group size and tour style</li>
+            </ul>
+        </div>
+
+        <!-- Form Section -->
+        <div class="form-section" id="form">
+            <h2>Get Your Free Insider's Guide</h2>
+            <p class="form-intro">
+                Instant delivery &bull; No spam &bull; Local expertise from 25+ years on Virginia roads
+            </p>
+
+            <form id="winetours-form" action="#" method="POST">
+                <!-- JTZ: Replace action="#" with your form handler endpoint -->
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="firstName">First Name <span class="required">*</span></label>
+                        <input type="text" id="firstName" name="firstName" required placeholder="John">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="lastName">Last Name <span class="required">*</span></label>
+                        <input type="text" id="lastName" name="lastName" required placeholder="Smith">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address <span class="required">*</span></label>
+                    <input type="email" id="email" name="email" required placeholder="john.smith@example.com">
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Phone Number <span class="required">*</span></label>
+                    <input type="tel" id="phone" name="phone" required placeholder="(804) 555-1234">
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="tourDate">Preferred Tour Date (Optional)</label>
+                        <input type="date" id="tourDate" name="tourDate">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="groupSize">Group Size (Optional)</label>
+                        <select id="groupSize" name="groupSize">
+                            <option value="">Select...</option>
+                            <option value="1-4">1-4 people</option>
+                            <option value="5-8">5-8 people</option>
+                            <option value="9-14">9-14 people</option>
+                            <option value="15+">15+ people</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="tour_interest" value="yes">
+                        I'm interested in booking a professional wine tour with TNT
+                    </label>
+                </div>
+
+                <button type="submit" class="submit-btn">
+                    Get My Free Guide Now
+                </button>
+
+                <div class="trust-badge">
+                    <p>Your information is secure and will never be shared. You'll receive your guide instantly and occasional wine tour updates from TNT Limousine.</p>
+                </div>
+            </form>
+        </div>
+
+        <!-- CTA Banner -->
+        <div class="cta-banner">
+            <h3>Don't Want to Be the Designated Driver?</h3>
+            <p>Book a tour and we'll handle the driving while everyone enjoys the tastings.</p>
+            <a href="https://www.tntlimousine.com/reservation" target="_blank">Reserve Your Wine Tour</a>
+            <p class="cta-note">
+                A dispatcher will contact you within 24 hours to confirm availability and finalize your booking.
+            </p>
+        </div>
+
+        <!-- About TNT -->
+        <div class="footer-about">
+            <h3>About TNT Limousine</h3>
+            <p>
+                We're a locally owned limousine company that's been serving Central Virginia since 1999. Our drivers have logged thousands of miles on the winding roads of Virginia wine country — they know every winery entrance, every scenic overlook, and every shortcut between tasting rooms. Whether you're planning a self-guided trip or want us behind the wheel so your whole group can enjoy the tastings, this guide is our gift to fellow wine lovers. No catch, just useful info from people who actually know these routes.
+            </p>
+            <div class="footer-links">
+                <a href="https://www.tntlimousine.com/fleet" target="_blank">View Our Fleet</a>
+                <a href="https://www.tntlimousine.com" target="_blank">Visit Our Website</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sidebar Fleet Link (Desktop) -->
+    <div class="sidebar-link">
+        <a href="https://www.tntlimousine.com/fleet" target="_blank">View Our<br>Fleet</a>
+        <p>See our vehicles</p>
+    </div>
+
+    <script>
+        // Form validation and enhancement
+        document.getElementById('winetours-form').addEventListener('submit', function(e) {
+            // Basic phone number formatting
+            const phoneInput = document.getElementById('phone');
+            let phone = phoneInput.value.replace(/\D/g, '');
+
+            if (phone.length === 10) {
+                phoneInput.value = '(' + phone.slice(0,3) + ') ' + phone.slice(3,6) + '-' + phone.slice(6);
+            }
+
+            // JTZ: Your form handler will process the submission
+            // The default action will be to POST to your endpoint
+        });
+
+        // Auto-format phone as user types
+        document.getElementById('phone').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length > 0) {
+                if (value.length <= 3) {
+                    e.target.value = '(' + value;
+                } else if (value.length <= 6) {
+                    e.target.value = '(' + value.slice(0,3) + ') ' + value.slice(3);
+                } else {
+                    e.target.value = '(' + value.slice(0,3) + ') ' + value.slice(3,6) + '-' + value.slice(6,10);
+                }
+            }
+        });
+
+        // Smooth scroll to form
+        document.querySelector('.hero-cta').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById('form').scrollIntoView({ behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TNT Limousine - Virginia Wine Country Interactive Map</title>
+
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background: #f5f5f5;
+        }
+
+        .header {
+            background: #2d2d2d;
+            color: white;
+            padding: 15px 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header h1 {
+            font-size: 1.8em;
+            margin-bottom: 5px;
+        }
+
+        .header .subtitle {
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+
+        .stats-bar {
+            background: #fdf6f0;
+            padding: 10px 20px;
+            text-align: center;
+            font-size: 0.9em;
+            border-bottom: 2px solid #d4a574;
+        }
+
+        .stats-bar strong {
+            color: #8B4513;
+        }
+
+        .controls {
+            background: white;
+            padding: 12px 20px;
+            border-bottom: 2px solid #e0e0e0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .filter-btn {
+            padding: 8px 16px;
+            border: 2px solid #555555;
+            background: white;
+            color: #555555;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9em;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .filter-btn:hover {
+            background: #555555;
+            color: white;
+        }
+
+        .filter-btn.active {
+            background: #555555;
+            color: white;
+        }
+
+        .priority-btn {
+            border-color: #CC0000;
+            color: #CC0000;
+        }
+
+        .priority-btn.active,
+        .priority-btn:hover {
+            background: #CC0000;
+            color: white;
+        }
+
+        .reset-btn {
+            margin-left: auto;
+            background: #95a5a6;
+            color: white;
+            border-color: #95a5a6;
+        }
+
+        .reset-btn:hover {
+            background: #7f8c8d;
+            border-color: #7f8c8d;
+        }
+
+        .map-container {
+            flex: 1;
+            position: relative;
+        }
+
+        #map {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Popup styles */
+        .leaflet-popup-content-wrapper {
+            border-radius: 8px;
+            padding: 0;
+        }
+
+        .popup-content {
+            padding: 15px;
+            min-width: 280px;
+            max-width: 340px;
+        }
+
+        .popup-title {
+            font-size: 1.1em;
+            font-weight: bold;
+            color: #2d2d2d;
+            margin-bottom: 10px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #CC0000;
+        }
+
+        .popup-title .star {
+            color: #CC0000;
+            font-weight: bold;
+        }
+
+        .popup-detail {
+            margin: 6px 0;
+            font-size: 0.9em;
+            line-height: 1.5;
+        }
+
+        .popup-detail strong {
+            color: #555;
+            display: inline-block;
+            min-width: 110px;
+        }
+
+        .popup-features {
+            background: #f5f5f5;
+            padding: 8px 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+            font-size: 0.85em;
+            color: #444;
+        }
+
+        .popup-features-label {
+            font-weight: bold;
+            color: #666;
+            text-transform: uppercase;
+            font-size: 0.8em;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+        }
+
+        .popup-tip {
+            background: #e8f5e9;
+            border-left: 3px solid #27ae60;
+            padding: 8px;
+            margin-top: 10px;
+            font-size: 0.85em;
+        }
+
+        .popup-tip strong {
+            color: #27ae60;
+        }
+
+        .legend {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            z-index: 1000;
+            font-size: 0.85em;
+        }
+
+        .legend-title {
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #2d2d2d;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin: 5px 0;
+        }
+
+        .legend-marker {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+
+        .marker-featured {
+            background: #CC0000;
+        }
+
+        .marker-standard {
+            background: #555555;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.3em;
+            }
+
+            .header .subtitle {
+                font-size: 0.8em;
+            }
+
+            .controls {
+                padding: 10px;
+            }
+
+            .filter-btn {
+                font-size: 0.8em;
+                padding: 6px 12px;
+            }
+
+            .legend {
+                bottom: 10px;
+                right: 10px;
+                font-size: 0.75em;
+                padding: 10px;
+            }
+
+            .popup-content {
+                min-width: 240px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header h1 {
+                font-size: 1.1em;
+            }
+
+            .controls {
+                gap: 6px;
+                padding: 8px;
+            }
+
+            .filter-btn {
+                font-size: 0.75em;
+                padding: 5px 10px;
+            }
+
+            .popup-content {
+                min-width: 220px;
+                max-width: 280px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Virginia Wine Country Interactive Map</h1>
+        <div class="subtitle">Click any marker for tasting details, hours, and insider tips from TNT drivers</div>
+    </div>
+
+    <div class="stats-bar">
+        <strong>Viewing:</strong> <span id="visible-count">24</span> of 24 wineries | <strong>Available:</strong> Year-Round
+    </div>
+
+    <div class="controls">
+        <button class="filter-btn priority-btn" data-filter="featured">Featured Wineries</button>
+        <button class="filter-btn" data-filter="Monticello AVA">Monticello AVA</button>
+        <button class="filter-btn" data-filter="Richmond Area">Richmond Area</button>
+        <button class="filter-btn" data-filter="food">Food Available</button>
+        <button class="filter-btn reset-btn" data-filter="reset">Show All</button>
+    </div>
+
+    <div class="map-container">
+        <div id="map"></div>
+
+        <div class="legend">
+            <div class="legend-title">Map Legend</div>
+            <div class="legend-item">
+                <div class="legend-marker marker-featured"></div>
+                <span>Featured Winery</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-marker marker-standard"></div>
+                <span>Standard Winery</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <script>
+        // Virginia Wine Country - Winery Data
+        const wineries = [
+            // === MONTICELLO AVA (15 wineries) ===
+            {
+                id: 1,
+                name: "King Family Vineyards",
+                address: "6550 Roseland Farm, Crozet, VA",
+                region: "Monticello AVA",
+                lat: 38.0650,
+                lng: -78.7000,
+                driveTime: "75 min from Richmond",
+                tastings: "$20 tastings",
+                hours: "Daily 10am-5:30pm",
+                signatureWines: "Cros\u00e9, Viognier, Meritage",
+                features: "Polo field, Blue Ridge views, gourmet food",
+                insiderTip: "Visit weekdays, Tuesdays empty",
+                priority: "featured",
+                foodAvailable: true
+            },
+            {
+                id: 2,
+                name: "Barboursville Vineyards",
+                address: "Barboursville, VA",
+                region: "Monticello AVA",
+                lat: 38.2150,
+                lng: -78.2700,
+                driveTime: "70 min from Richmond",
+                tastings: "",
+                hours: "",
+                signatureWines: "",
+                features: "Jefferson ruins, Palladio restaurant, founded 1976 by Zonin family",
+                insiderTip: "Ruins alone worth the drive",
+                priority: "featured",
+                foodAvailable: true
+            },
+            {
+                id: 3,
+                name: "Blenheim Vineyards",
+                address: "Charlottesville, VA",
+                region: "Monticello AVA",
+                lat: 37.9800,
+                lng: -78.5100,
+                driveTime: "75 min from Richmond",
+                tastings: "",
+                hours: "",
+                signatureWines: "Cab Franc, Viognier",
+                features: "Owned by Dave Matthews, eco-friendly, live music",
+                insiderTip: "Celebrity-owned but serious wine",
+                priority: "standard",
+                foodAvailable: false
+            },
+            {
+                id: 4,
+                name: "Pippin Hill Farm",
+                address: "North Garden, VA",
+                region: "Monticello AVA",
+                lat: 37.9100,
+                lng: -78.6300,
+                driveTime: "80 min from Richmond",
+                tastings: "",
+                hours: "",
+                signatureWines: "",
+                features: "Garden-to-table food, cooking classes, floral workshops",
+                insiderTip: "Best for couples and foodies",
+                priority: "standard",
+                foodAvailable: true
+            },
+            {
+                id: 5,
+                name: "Veritas Vineyard",
+                address: "Afton, VA",
+                region: "Monticello AVA",
+                lat: 37.9600,
+                lng: -78.8500,
+                driveTime: "85 min from Richmond",
+                tastings: "",
+                hours: "",
+                winemaker: "Emily Hodson",
+                signatureWines: "Petit Verdot, Chardonnay, Claret",
+                features: "Blue Ridge views",
+                insiderTip: "",
+                priority: "featured",
+                foodAvailable: false
+            },
+            {
+                id: 6,
+                name: "Eastwood Farm & Winery",
+                address: "Charlottesville, VA",
+                region: "Monticello AVA",
+                lat: 38.0300,
+                lng: -78.4800,
+                driveTime: "70 min from Richmond",
+                tastings: "",
+                hours: "Open 7 days a week",
+                signatureWines: "",
+                features: "Wine + beer + cider, dog-friendly, wine slushies",
+                insiderTip: "Something for everyone, wine skeptics try cider",
+                priority: "standard",
+                foodAvailable: true
+            },
+            {
+                id: 7,
+                name: "Merrie Mill Farm",
+                address: "594 Merrie Mill Farm, Keswick, VA",
+                region: "Monticello AVA",
+                lat: 38.0200,
+                lng: -78.3800,
+                driveTime: "75 min from Richmond",
+                tastings: "",
+                hours: "",
+                signatureWines: "",
+                features: "Most Instagrammable, 5000 sq ft tasting room, Sundowners, Blues & Jazz",
+                insiderTip: "Visual showpiece, every group wants photos",
+                priority: "featured",
+                foodAvailable: true
+            },
+            {
+                id: 8,
+                name: "Stinson Vineyards",
+                address: "Crozet, VA",
+                region: "Monticello AVA",
+                lat: 38.0500,
+                lng: -78.7200,
+                driveTime: "75 min from Richmond",
+                tastings: "",
+                hours: "",
+                signatureWines: "",
+                features: "Garagiste in 3-car garage, Bordeaux inspired, Blue Ridge views, B&B",
+                insiderTip: "Small-batch artisan, feels like visiting a friend",
+                priority: "standard",
+                foodAvailable: false
+            },
+            {
+                id: 9,
+                name: "Early Mountain Vineyards",
+                address: "6109 Wolftown-Hood Rd, Madison, VA",
+                region: "Monticello AVA",
+                lat: 38.3800,
+                lng: -78.2700,
+                driveTime: "80 min from Richmond",
+                tastings: "",
+                hours: "",
+                winemaker: "Maya Hood White",
+                signatureWines: "",
+                features: "Low-impact viticulture, top tasting room in VA",
+                insiderTip: "Best of VA wine for serious tasters",
+                priority: "featured",
+                foodAvailable: true
+            },
+            {
+                id: 10,
+                name: "Southwest Mountains Vineyards",
+                address: "2300 Whipper In Lane, Keswick, VA",
+                region: "Monticello AVA",
+                lat: 38.0100,
+                lng: -78.3500,
+                driveTime: "70 min from Richmond",
+                tastings: "",
+                hours: "",
+                winemaker: "Boela Gerber (22yr South Africa)",
+                signatureWines: "",
+                features: "1903 historic barn, Keswick horse country",
+                insiderTip: "Haven't heard of it yet, bragging rights",
+                priority: "standard",
+                foodAvailable: false
+            },
+            {
+                id: 11,
+                name: "Hazy Mountain Vineyard & Brewery",
+                address: "Afton, VA",
+                region: "Monticello AVA",
+                lat: 37.9400,
+                lng: -78.8700,
+                driveTime: "85 min from Richmond",
+                tastings: "",
+                hours: "",
+                signatureWines: "",
+                features: "Secret Supper Club, brewery on-site, stone-fired pizza",
+                insiderTip: "Wine + beer + great food",
+                priority: "standard",
+                foodAvailable: true
+            },
+            {
+                id: 12,
+                name: "Horton Vineyards",
+                address: "Gordonsville, VA",
+                region: "Monticello AVA",
+                lat: 38.1400,
+                lng: -78.1900,
+                driveTime: "65 min from Richmond",
+                tastings: "",
+                hours: "",
+                signatureWines: "Viognier, Rkatsiteli, Wildkat",
+                features: "Original VA Viognier, rare Rkatsiteli grape, Wildkat wine, since 1989",
+                insiderTip: "History and adventure, unusual grapes",
+                priority: "standard",
+                foodAvailable: false
+            },
+            {
+                id: 13,
+                name: "Afton Mountain Vineyards",
+                address: "Afton, VA",
+                region: "Monticello AVA",
+                lat: 37.9500,
+                lng: -78.8600,
+                driveTime: "85 min from Richmond",
+                tastings: "",
+                hours: "",
+                signatureWines: "",
+                features: "360-degree mountain views, vines since 1970s",
+                insiderTip: "Old-guard VA winery, stunning panorama",
+                priority: "standard",
+                foodAvailable: false
+            },
+            {
+                id: 14,
+                name: "Glass House Winery",
+                address: "Free Union, VA",
+                region: "Monticello AVA",
+                lat: 38.1400,
+                lng: -78.5800,
+                driveTime: "80 min from Richmond",
+                tastings: "",
+                hours: "",
+                signatureWines: "",
+                features: "Tropical conservatory, estate-grown",
+                insiderTip: "Quirky and intimate",
+                priority: "standard",
+                foodAvailable: false
+            },
+            {
+                id: 15,
+                name: "Mount Ida Reserve",
+                address: "Near Charlottesville, VA",
+                region: "Monticello AVA",
+                lat: 37.9900,
+                lng: -78.5500,
+                driveTime: "75 min from Richmond",
+                tastings: "",
+                hours: "",
+                signatureWines: "",
+                features: "5000-acre farm, 27 acres vineyards, farm-to-glass, beef on farm",
+                insiderTip: "Feels like different world",
+                priority: "standard",
+                foodAvailable: true
+            },
+
+            // === RICHMOND AREA (9 wineries) ===
+            {
+                id: 16,
+                name: "Upper Shirley Vineyards",
+                address: "Charles City, VA",
+                region: "Richmond Area",
+                lat: 37.3200,
+                lng: -77.1200,
+                driveTime: "35 min from Richmond",
+                tastings: "",
+                hours: "",
+                signatureWines: "",
+                features: "James River bend, tableside service, river views, seasonal food",
+                insiderTip: "Special occasion winery, river views unmatched",
+                priority: "featured",
+                foodAvailable: true
+            },
+            {
+                id: 17,
+                name: "James River Cellars",
+                address: "Glen Allen, VA",
+                region: "Richmond Area",
+                lat: 37.6600,
+                lng: -77.5100,
+                driveTime: "20 min from Richmond",
+                tastings: "$5 tastings, 13-15 varieties",
+                hours: "Year-round 10am-6pm",
+                signatureWines: "Gew\u00fcrztraminer",
+                features: "Closest quality winery to Richmond, affordable",
+                insiderTip: "Local gem, easy first or last stop",
+                priority: "standard",
+                foodAvailable: false
+            },
+            {
+                id: 18,
+                name: "New Kent Winery",
+                address: "New Kent, VA",
+                region: "Richmond Area",
+                lat: 37.5200,
+                lng: -76.9800,
+                driveTime: "30 min from Richmond",
+                tastings: "",
+                hours: "",
+                winemaker: "Tom Payette",
+                signatureWines: "",
+                features: "Talleysville Brewing on-site, 12 brews, happy hour",
+                insiderTip: "Wine + craft beer in one stop",
+                priority: "standard",
+                foodAvailable: false
+            },
+            {
+                id: 19,
+                name: "Saud\u00e9 Creek Vineyards",
+                address: "Lanexa, VA",
+                region: "Richmond Area",
+                lat: 37.4100,
+                lng: -76.8500,
+                driveTime: "40 min from Richmond",
+                tastings: "",
+                hours: "Wed-Mon 11am-6pm, Fri until 9pm",
+                signatureWines: "Saud\u00e9 Creek Red, Pamunkey White",
+                features: "Pamunkey River, wrap-around porch",
+                insiderTip: "Unplug and breathe",
+                priority: "standard",
+                foodAvailable: false
+            },
+            {
+                id: 20,
+                name: "Jolene Family Winery",
+                address: "Richmond area, VA",
+                region: "Richmond Area",
+                lat: 37.5800,
+                lng: -77.4700,
+                driveTime: "15 min from Richmond",
+                tastings: "",
+                hours: "",
+                signatureWines: "Lakeview White",
+                features: "Lakeside, stone patio, greenhouse, food trucks, RVA Cheese Girl",
+                insiderTip: "City escape without the drive",
+                priority: "standard",
+                foodAvailable: true
+            },
+            {
+                id: 21,
+                name: "Ashton Creek Vineyard",
+                address: "14501 Jefferson Davis Hwy, Chester, VA",
+                region: "Richmond Area",
+                lat: 37.3500,
+                lng: -77.4200,
+                driveTime: "25 min from Richmond",
+                tastings: "",
+                hours: "",
+                winemaker: "Alan Thibault",
+                signatureWines: "",
+                features: "Kitchen on-site",
+                insiderTip: "South-side option",
+                priority: "standard",
+                foodAvailable: true
+            },
+            {
+                id: 22,
+                name: "7 Lady Vineyards at Dover Hall",
+                address: "1500 Manakin Rd, Manakin-Sabot, VA",
+                region: "Richmond Area",
+                lat: 37.6000,
+                lng: -77.7000,
+                driveTime: "25 min from Richmond",
+                tastings: "",
+                hours: "",
+                signatureWines: "",
+                features: "VA wines + international styles, wine dinners, events",
+                insiderTip: "West-end polished events vibe",
+                priority: "standard",
+                foodAvailable: false
+            },
+            {
+                id: 23,
+                name: "Fifty-Third Winery",
+                address: "Louisa, VA",
+                region: "Richmond Area",
+                lat: 38.0200,
+                lng: -78.0000,
+                driveTime: "50 min from Richmond",
+                tastings: "",
+                hours: "Mon-Sun 11am-5pm",
+                signatureWines: "",
+                features: "Heart of VA Wine Trail, private tastings",
+                insiderTip: "Midway between Richmond and Charlottesville",
+                groups: "8+ call (540) 894-1536",
+                priority: "standard",
+                foodAvailable: false
+            },
+            {
+                id: 24,
+                name: "Cooper Vineyards",
+                address: "Louisa, VA",
+                region: "Richmond Area",
+                lat: 38.0100,
+                lng: -77.9800,
+                driveTime: "50 min from Richmond",
+                tastings: "",
+                hours: "",
+                winemaker: "Graham Bell",
+                signatureWines: "Noche (sweet red dessert)",
+                features: "Best tasting room (2012/13), two-story glass, Friday live music",
+                insiderTip: "Architecture lovers, tasting room is a destination",
+                priority: "standard",
+                foodAvailable: true
+            }
+        ];
+
+        // Initialize the map centered between Richmond and Charlottesville
+        const map = L.map('map').setView([37.9, -78.1], 9);
+
+        // Add tile layer (OpenStreetMap)
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        // Store all markers
+        let markers = [];
+        let activeFilter = null;
+
+        // Create custom icons
+        const standardIcon = L.divIcon({
+            className: 'custom-marker',
+            html: '<div style="background:#555555;width:18px;height:18px;border-radius:50%;border:3px solid white;box-shadow:0 2px 5px rgba(0,0,0,0.3);"></div>',
+            iconSize: [18, 18],
+            iconAnchor: [9, 9]
+        });
+
+        const featuredIcon = L.divIcon({
+            className: 'custom-marker',
+            html: '<div style="background:#CC0000;width:24px;height:24px;border-radius:50%;border:3px solid white;box-shadow:0 2px 8px rgba(0,0,0,0.4);"></div>',
+            iconSize: [24, 24],
+            iconAnchor: [12, 12]
+        });
+
+        // Create popup content for each winery
+        function createPopupContent(winery) {
+            let html = '<div class="popup-content">';
+
+            // Title with star for featured
+            html += '<div class="popup-title">';
+            html += winery.name;
+            if (winery.priority === 'featured') {
+                html += ' <span class="star">&#9733;</span>';
+            }
+            html += '</div>';
+
+            // Address
+            html += '<div class="popup-detail"><strong>Address:</strong> ' + winery.address + '</div>';
+
+            // Drive time
+            html += '<div class="popup-detail"><strong>Drive Time:</strong> ' + winery.driveTime + '</div>';
+
+            // Tastings
+            if (winery.tastings) {
+                html += '<div class="popup-detail"><strong>Tastings:</strong> ' + winery.tastings + '</div>';
+            }
+
+            // Hours
+            if (winery.hours) {
+                html += '<div class="popup-detail"><strong>Hours:</strong> ' + winery.hours + '</div>';
+            }
+
+            // Winemaker
+            if (winery.winemaker) {
+                html += '<div class="popup-detail"><strong>Winemaker:</strong> ' + winery.winemaker + '</div>';
+            }
+
+            // Signature wines
+            if (winery.signatureWines) {
+                html += '<div class="popup-detail"><strong>Signature Wines:</strong> ' + winery.signatureWines + '</div>';
+            }
+
+            // Groups info
+            if (winery.groups) {
+                html += '<div class="popup-detail"><strong>Groups:</strong> ' + winery.groups + '</div>';
+            }
+
+            // Unique features (gray box)
+            if (winery.features) {
+                html += '<div class="popup-features">';
+                html += '<div class="popup-features-label">Unique Features</div>';
+                html += winery.features;
+                html += '</div>';
+            }
+
+            // Insider tip (green box)
+            if (winery.insiderTip) {
+                html += '<div class="popup-tip">';
+                html += '<strong>Insider Tip:</strong> ' + winery.insiderTip;
+                html += '</div>';
+            }
+
+            html += '</div>';
+            return html;
+        }
+
+        // Add markers for all wineries
+        wineries.forEach(function(winery) {
+            var icon = winery.priority === 'featured' ? featuredIcon : standardIcon;
+
+            var marker = L.marker([winery.lat, winery.lng], { icon: icon })
+                .bindPopup(createPopupContent(winery));
+
+            marker.wineryData = winery;
+            marker.addTo(map);
+            markers.push(marker);
+        });
+
+        // Filter functionality
+        document.querySelectorAll('.filter-btn').forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                var filter = this.getAttribute('data-filter');
+
+                if (filter === 'reset') {
+                    activeFilter = null;
+                    document.querySelectorAll('.filter-btn').forEach(function(b) {
+                        b.classList.remove('active');
+                    });
+                    showAllMarkers();
+                    return;
+                }
+
+                // Toggle active state
+                if (this.classList.contains('active')) {
+                    this.classList.remove('active');
+                    activeFilter = null;
+                    showAllMarkers();
+                } else {
+                    document.querySelectorAll('.filter-btn').forEach(function(b) {
+                        b.classList.remove('active');
+                    });
+                    this.classList.add('active');
+                    activeFilter = filter;
+                    filterMarkers(filter);
+                }
+            });
+        });
+
+        function showAllMarkers() {
+            markers.forEach(function(marker) {
+                marker.addTo(map);
+            });
+            map.fitBounds(L.latLngBounds(markers.map(function(m) {
+                return m.getLatLng();
+            })), { padding: [30, 30] });
+            updateVisibleCount(markers.length);
+        }
+
+        function filterMarkers(filter) {
+            var visibleMarkers = [];
+
+            markers.forEach(function(marker) {
+                var winery = marker.wineryData;
+                var show = false;
+
+                if (filter === 'featured') {
+                    show = winery.priority === 'featured';
+                } else if (filter === 'food') {
+                    show = winery.foodAvailable === true;
+                } else {
+                    // Region filter
+                    show = winery.region === filter;
+                }
+
+                if (show) {
+                    marker.addTo(map);
+                    visibleMarkers.push(marker);
+                } else {
+                    map.removeLayer(marker);
+                }
+            });
+
+            if (visibleMarkers.length > 0) {
+                map.fitBounds(L.latLngBounds(visibleMarkers.map(function(m) {
+                    return m.getLatLng();
+                })), { padding: [30, 30] });
+            }
+
+            updateVisibleCount(visibleMarkers.length);
+        }
+
+        function updateVisibleCount(count) {
+            document.getElementById('visible-count').textContent = count;
+        }
+    </script>
+</body>
+</html>

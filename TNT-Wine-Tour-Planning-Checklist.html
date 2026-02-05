@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TNT Limousine - Virginia Wine Tour Planning Checklist</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+        @media print {
+            body {
+                margin: 0;
+                padding: 15px;
+                background: white;
+                color: #333;
+            }
+            .page-break {
+                page-break-after: always;
+            }
+            input[type="checkbox"] {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            .header {
+                background: #CC0000 !important;
+            }
+            .checklist-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.5;
+            color: #333;
+            background: #ffffff;
+            max-width: 8.5in;
+            margin: 0 auto;
+            padding: 0.5in;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            padding: 2rem 1.5rem;
+            background: #CC0000;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(204, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header h1 {
+            font-size: 1.75rem;
+            color: white;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        .header .subtitle {
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 400;
+        }
+
+        .stats-bar {
+            background: #fafafa;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            font-size: 0.875rem;
+            border: 1px solid #e5e5e5;
+            color: #555;
+        }
+
+        .stats-bar strong {
+            color: #CC0000;
+            font-size: 1.5rem;
+        }
+
+        .pre-tour-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .pre-tour-header {
+            background: #ffffff;
+            color: #333;
+            padding: 0.75rem 1rem;
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-left: 4px solid #CC0000;
+            border: 1px solid #e5e5e5;
+            border-left: 4px solid #CC0000;
+        }
+
+        .pre-tour-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .pre-tour-item {
+            display: flex;
+            align-items: flex-start;
+            padding: 0.65rem 0.75rem;
+            background: #ffffff;
+            border-radius: 6px;
+            border: 1px solid #e8e8e8;
+            font-size: 0.875rem;
+            transition: all 0.2s ease;
+        }
+
+        .pre-tour-item:hover {
+            background: #fafafa;
+            border-color: #CC0000;
+        }
+
+        .pre-tour-item input[type="checkbox"] {
+            margin-right: 0.75rem;
+            margin-top: 2px;
+            width: 18px;
+            height: 18px;
+            flex-shrink: 0;
+            cursor: pointer;
+            accent-color: #CC0000;
+        }
+
+        .pre-tour-item label {
+            flex: 1;
+            cursor: pointer;
+            color: #444;
+        }
+
+        .instructions {
+            background: #fff8f8;
+            padding: 1rem;
+            border-left: 4px solid #CC0000;
+            margin-bottom: 1.5rem;
+            font-size: 0.875rem;
+            border-radius: 6px;
+            color: #555;
+        }
+
+        .instructions strong {
+            color: #333;
+        }
+
+        .region-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .region-header {
+            background: #ffffff;
+            color: #333;
+            padding: 0.75rem 1rem;
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid #e5e5e5;
+            border-left: 4px solid #CC0000;
+        }
+
+        .count-badge {
+            background: #CC0000;
+            color: #ffffff;
+            padding: 2px 10px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
+        .checklist-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.5rem;
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: flex-start;
+            padding: 0.75rem;
+            background: #ffffff;
+            border-radius: 6px;
+            border: 1px solid #e8e8e8;
+            font-size: 0.875rem;
+            transition: all 0.2s ease;
+        }
+
+        .checklist-item:hover {
+            background: #fafafa;
+            border-color: #CC0000;
+            transform: translateX(2px);
+        }
+
+        .checklist-item.featured {
+            border-left: 3px solid #CC0000;
+        }
+
+        .checklist-item input[type="checkbox"] {
+            margin-right: 0.75rem;
+            margin-top: 2px;
+            width: 18px;
+            height: 18px;
+            flex-shrink: 0;
+            cursor: pointer;
+            accent-color: #CC0000;
+        }
+
+        .winery-text {
+            flex: 1;
+            line-height: 1.5;
+        }
+
+        .winery-name {
+            font-weight: 600;
+            color: #222;
+        }
+
+        .winery-city {
+            color: #777;
+            font-size: 0.75rem;
+        }
+
+        .winery-note {
+            color: #999;
+            font-size: 0.75rem;
+            font-style: italic;
+        }
+
+        .star {
+            color: #CC0000;
+            margin-left: 0.25rem;
+            font-style: normal;
+        }
+
+        .progress-tracker {
+            background: #fafafa;
+            padding: 1.25rem;
+            border-radius: 8px;
+            margin-top: 1.5rem;
+            text-align: center;
+            font-size: 0.875rem;
+            border: 1px solid #e5e5e5;
+            color: #555;
+        }
+
+        .progress-tracker strong {
+            color: #CC0000;
+        }
+
+        .notes-section {
+            margin-top: 2rem;
+            padding: 1.25rem;
+            background: #ffffff;
+            border: 2px solid #e5e5e5;
+            border-radius: 8px;
+        }
+
+        .notes-section h3 {
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            color: #CC0000;
+        }
+
+        .notes-lines {
+            line-height: 2;
+        }
+
+        .notes-line {
+            border-bottom: 1px solid #e5e5e5;
+            min-height: 24px;
+            margin-bottom: 0.75rem;
+        }
+
+        .tasting-grid {
+            margin-top: 1.5rem;
+        }
+
+        .tasting-row {
+            display: grid;
+            grid-template-columns: 1fr 2fr 2fr 1fr;
+            gap: 0.5rem;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #e5e5e5;
+            font-size: 0.8rem;
+            color: #555;
+        }
+
+        .tasting-row.tasting-header {
+            font-weight: 600;
+            color: #333;
+            border-bottom: 2px solid #CC0000;
+        }
+
+        .tasting-row span {
+            padding: 0.25rem 0;
+        }
+
+        .footer {
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 2px solid #e5e5e5;
+            text-align: center;
+            font-size: 0.875rem;
+            color: #999;
+        }
+
+        .footer strong {
+            color: #333;
+            font-weight: 600;
+            display: block;
+            margin-bottom: 0.75rem;
+        }
+
+        .footer p {
+            margin-bottom: 0.35rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>Virginia Wine Tour Planning Checklist</h1>
+        <div class="subtitle">Track Your Journey Through Virginia's Best Wineries!</div>
+    </div>
+
+    <div class="stats-bar">
+        <strong>24</strong> Wineries | <strong>2</strong> Regions | <strong>Countless</strong> Great Wines
+    </div>
+
+    <!-- PRE-TOUR PLANNING -->
+    <div class="pre-tour-section">
+        <div class="pre-tour-header">
+            <span>PRE-TOUR PLANNING</span>
+        </div>
+        <div class="pre-tour-list">
+            <div class="pre-tour-item">
+                <input type="checkbox" id="pre1">
+                <label for="pre1">Designate a driver or book TNT for professional transportation</label>
+            </div>
+            <div class="pre-tour-item">
+                <input type="checkbox" id="pre2">
+                <label for="pre2">Check winery hours for your planned date</label>
+            </div>
+            <div class="pre-tour-item">
+                <input type="checkbox" id="pre3">
+                <label for="pre3">Make reservations for groups of 10+</label>
+            </div>
+            <div class="pre-tour-item">
+                <input type="checkbox" id="pre4">
+                <label for="pre4">Budget $15-20 per person per winery for tastings</label>
+            </div>
+            <div class="pre-tour-item">
+                <input type="checkbox" id="pre5">
+                <label for="pre5">Bring water bottle, sunscreen (summer), light jacket (spring/fall)</label>
+            </div>
+            <div class="pre-tour-item">
+                <input type="checkbox" id="pre6">
+                <label for="pre6">Download this checklist for offline use</label>
+            </div>
+        </div>
+    </div>
+
+    <div class="instructions">
+        <strong>How to Use:</strong> Check off each winery as you visit. Use the tasting notes section to record your favorites! <span class="star">&#9733;</span> = Featured Winery
+    </div>
+
+    <!-- MONTICELLO AVA / CHARLOTTESVILLE -->
+    <div class="region-section">
+        <div class="region-header">
+            <span>MONTICELLO AVA / CHARLOTTESVILLE</span>
+            <span class="count-badge">15 wineries</span>
+        </div>
+        <div class="checklist-grid">
+            <div class="checklist-item featured">
+                <input type="checkbox" id="w1">
+                <label for="w1" class="winery-text">
+                    <span class="winery-name">King Family Vineyards<span class="star">&#9733;</span></span><br>
+                    <span class="winery-city">Crozet</span><br>
+                    <span class="winery-note">Polo field, Blue Ridge views</span>
+                </label>
+            </div>
+            <div class="checklist-item featured">
+                <input type="checkbox" id="w2">
+                <label for="w2" class="winery-text">
+                    <span class="winery-name">Barboursville Vineyards<span class="star">&#9733;</span></span><br>
+                    <span class="winery-city">Barboursville</span><br>
+                    <span class="winery-note">Jefferson ruins, Octagon wine</span>
+                </label>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" id="w3">
+                <label for="w3" class="winery-text">
+                    <span class="winery-name">Blenheim Vineyards</span><br>
+                    <span class="winery-city">Charlottesville</span><br>
+                    <span class="winery-note">Dave Matthews, eco-friendly</span>
+                </label>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" id="w4">
+                <label for="w4" class="winery-text">
+                    <span class="winery-name">Pippin Hill Farm</span><br>
+                    <span class="winery-city">North Garden</span><br>
+                    <span class="winery-note">Garden-to-table, cooking classes</span>
+                </label>
+            </div>
+            <div class="checklist-item featured">
+                <input type="checkbox" id="w5">
+                <label for="w5" class="winery-text">
+                    <span class="winery-name">Veritas Vineyard<span class="star">&#9733;</span></span><br>
+                    <span class="winery-city">Afton</span><br>
+                    <span class="winery-note">Blue Ridge views, Petit Verdot</span>
+                </label>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" id="w6">
+                <label for="w6" class="winery-text">
+                    <span class="winery-name">Eastwood Farm & Winery</span><br>
+                    <span class="winery-city">Charlottesville</span><br>
+                    <span class="winery-note">Wine + beer + cider, dog-friendly</span>
+                </label>
+            </div>
+            <div class="checklist-item featured">
+                <input type="checkbox" id="w7">
+                <label for="w7" class="winery-text">
+                    <span class="winery-name">Merrie Mill Farm<span class="star">&#9733;</span></span><br>
+                    <span class="winery-city">Keswick</span><br>
+                    <span class="winery-note">Most Instagrammable</span>
+                </label>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" id="w8">
+                <label for="w8" class="winery-text">
+                    <span class="winery-name">Stinson Vineyards</span><br>
+                    <span class="winery-city">Crozet</span><br>
+                    <span class="winery-note">Garagiste, Blue Ridge views</span>
+                </label>
+            </div>
+            <div class="checklist-item featured">
+                <input type="checkbox" id="w9">
+                <label for="w9" class="winery-text">
+                    <span class="winery-name">Early Mountain Vineyards<span class="star">&#9733;</span></span><br>
+                    <span class="winery-city">Madison</span><br>
+                    <span class="winery-note">Top tasting room in VA</span>
+                </label>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" id="w10">
+                <label for="w10" class="winery-text">
+                    <span class="winery-name">Southwest Mountains Vineyards</span><br>
+                    <span class="winery-city">Keswick</span><br>
+                    <span class="winery-note">1903 barn, horse country</span>
+                </label>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" id="w11">
+                <label for="w11" class="winery-text">
+                    <span class="winery-name">Hazy Mountain Vineyard & Brewery</span><br>
+                    <span class="winery-city">Afton</span><br>
+                    <span class="winery-note">Secret Supper Club, brewery</span>
+                </label>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" id="w12">
+                <label for="w12" class="winery-text">
+                    <span class="winery-name">Horton Vineyards</span><br>
+                    <span class="winery-city">Gordonsville</span><br>
+                    <span class="winery-note">Original VA Viognier</span>
+                </label>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" id="w13">
+                <label for="w13" class="winery-text">
+                    <span class="winery-name">Afton Mountain Vineyards</span><br>
+                    <span class="winery-city">Afton</span><br>
+                    <span class="winery-note">360-degree mountain views</span>
+                </label>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" id="w14">
+                <label for="w14" class="winery-text">
+                    <span class="winery-name">Glass House Winery</span><br>
+                    <span class="winery-city">Free Union</span><br>
+                    <span class="winery-note">Tropical conservatory</span>
+                </label>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" id="w15">
+                <label for="w15" class="winery-text">
+                    <span class="winery-name">Mount Ida Reserve</span><br>
+                    <span class="winery-city">Charlottesville</span><br>
+                    <span class="winery-note">5,000-acre working farm</span>
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <div class="page-break"></div>
+
+    <!-- RICHMOND AREA -->
+    <div class="region-section">
+        <div class="region-header">
+            <span>RICHMOND AREA</span>
+            <span class="count-badge">9 wineries</span>
+        </div>
+        <div class="checklist-grid">
+            <div class="checklist-item featured">
+                <input type="checkbox" id="w16">
+                <label for="w16" class="winery-text">
+                    <span class="winery-name">Upper Shirley Vineyards<span class="star">&#9733;</span></span><br>
+                    <span class="winery-city">Charles City</span><br>
+                    <span class="winery-note">James River views</span>
+                </label>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" id="w17">
+                <label for="w17" class="winery-text">
+                    <span class="winery-name">James River Cellars</span><br>
+                    <span class="winery-city">Glen Allen</span><br>
+                    <span class="winery-note">$5 tastings, 13-15 varieties</span>
+                </label>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" id="w18">
+                <label for="w18" class="winery-text">
+                    <span class="winery-name">New Kent Winery</span><br>
+                    <span class="winery-city">New Kent</span><br>
+                    <span class="winery-note">Brewery on-site too</span>
+                </label>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" id="w19">
+                <label for="w19" class="winery-text">
+                    <span class="winery-name">Saud&eacute; Creek Vineyards</span><br>
+                    <span class="winery-city">Lanexa</span><br>
+                    <span class="winery-note">Pamunkey River setting</span>
+                </label>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" id="w20">
+                <label for="w20" class="winery-text">
+                    <span class="winery-name">Jolene Family Winery</span><br>
+                    <span class="winery-city">Richmond</span><br>
+                    <span class="winery-note">Closest to downtown</span>
+                </label>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" id="w21">
+                <label for="w21" class="winery-text">
+                    <span class="winery-name">Ashton Creek Vineyard</span><br>
+                    <span class="winery-city">Chester</span><br>
+                    <span class="winery-note">Kitchen on-site</span>
+                </label>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" id="w22">
+                <label for="w22" class="winery-text">
+                    <span class="winery-name">7 Lady Vineyards at Dover Hall</span><br>
+                    <span class="winery-city">Manakin-Sabot</span><br>
+                    <span class="winery-note">Wine dinners, events</span>
+                </label>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" id="w23">
+                <label for="w23" class="winery-text">
+                    <span class="winery-name">Fifty-Third Winery</span><br>
+                    <span class="winery-city">Louisa</span><br>
+                    <span class="winery-note">Private tastings available</span>
+                </label>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" id="w24">
+                <label for="w24" class="winery-text">
+                    <span class="winery-name">Cooper Vineyards</span><br>
+                    <span class="winery-city">Louisa</span><br>
+                    <span class="winery-note">Best tasting room architecture</span>
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <div class="progress-tracker">
+        <strong>PROGRESS TRACKER:</strong> Visited ____ of 24 wineries | Favorite Wine: ________________
+    </div>
+
+    <div class="notes-section">
+        <h3>MY TASTING NOTES & FAVORITES</h3>
+        <div class="notes-lines">
+            <div class="notes-line"></div>
+            <div class="notes-line"></div>
+            <div class="notes-line"></div>
+            <div class="notes-line"></div>
+            <div class="notes-line"></div>
+            <div class="notes-line"></div>
+            <div class="notes-line"></div>
+            <div class="notes-line"></div>
+        </div>
+        <div class="tasting-grid">
+            <div class="tasting-row tasting-header">
+                <span>Date</span>
+                <span>Winery</span>
+                <span>Favorite Wine</span>
+                <span>Rating</span>
+            </div>
+            <div class="tasting-row">
+                <span>___________</span>
+                <span>_________________________</span>
+                <span>_________________________</span>
+                <span>___________</span>
+            </div>
+            <div class="tasting-row">
+                <span>___________</span>
+                <span>_________________________</span>
+                <span>_________________________</span>
+                <span>___________</span>
+            </div>
+            <div class="tasting-row">
+                <span>___________</span>
+                <span>_________________________</span>
+                <span>_________________________</span>
+                <span>___________</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <strong>TNT LIMOUSINE | Richmond's Wine Tour Specialists Since 1999</strong>
+        <p>Want the VIP experience? Book a professional wine tour!</p>
+        <p>(804) 435-4225 | tntlimousine.com | sedan@tntauto.com</p>
+        <p style="margin-top: 10px; font-size: 0.75rem;">
+            &copy; 2026 TNT Limousine. Winery hours and offerings may vary. Always drink responsibly.
+        </p>
+    </div>
+
+    <script>
+        // Save checkbox state to localStorage for digital use
+        document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                localStorage.setItem('wine-' + this.id, this.checked);
+                updateProgress();
+            });
+
+            // Load saved state
+            const saved = localStorage.getItem('wine-' + checkbox.id);
+            if (saved === 'true') {
+                checkbox.checked = true;
+            }
+        });
+
+        function updateProgress() {
+            const wineryCheckboxes = document.querySelectorAll('input[id^="w"]');
+            const total = wineryCheckboxes.length;
+            const checked = document.querySelectorAll('input[id^="w"]:checked').length;
+            console.log(`Progress: ${checked}/${total} wineries visited`);
+        }
+
+        updateProgress();
+    </script>
+</body>
+</html>

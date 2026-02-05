@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TNT Limousine - Virginia Wine Tour Insider's Guide</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+        @media print {
+            body {
+                margin: 0;
+                padding: 20px;
+                background: white !important;
+            }
+            .page-break {
+                page-break-after: always;
+            }
+            .header {
+                background: #CC0000 !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            .region-header {
+                background: #f3f4f6 !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            .winery-card, .intro-box, .pro-tip, .itinerary-card {
+                background: #f9fafb !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            .pricing-table th {
+                background: #CC0000 !important;
+                color: white !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #ffffff;
+            max-width: 8.5in;
+            margin: 0 auto;
+            padding: 0.5in;
+        }
+
+        /* ==================== HEADER ==================== */
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding: 2.5rem 2rem;
+            background: #CC0000;
+            border-radius: 8px;
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            color: white;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        .header .subtitle {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.92);
+            font-weight: 400;
+            margin-bottom: 0.5rem;
+        }
+
+        .header .tagline {
+            font-size: 0.875rem;
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 600;
+            margin-top: 0.5rem;
+        }
+
+        /* ==================== INTRO BOX ==================== */
+        .intro-box {
+            background: #f9fafb;
+            padding: 1.5rem;
+            border-left: 4px solid #CC0000;
+            margin-bottom: 2rem;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            border: 1px solid #e5e7eb;
+            border-left: 4px solid #CC0000;
+        }
+
+        .intro-box strong {
+            color: #CC0000;
+        }
+
+        /* ==================== LEGEND ==================== */
+        .legend {
+            background: #f9fafb;
+            padding: 1rem 1.25rem;
+            border-radius: 6px;
+            margin-bottom: 1.5rem;
+            font-size: 0.875rem;
+            border: 1px solid #e5e7eb;
+        }
+
+        .legend-title {
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #333;
+            font-size: 0.925rem;
+        }
+
+        .legend-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.5rem;
+            color: #555;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+        }
+
+        .featured-dot {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            background: #CC0000;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        /* ==================== REGION SECTIONS ==================== */
+        .region-section {
+            margin-bottom: 2rem;
+        }
+
+        .region-header {
+            background: #f3f4f6;
+            color: #333;
+            padding: 1rem 1.5rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            border-radius: 6px;
+            border-left: 4px solid #CC0000;
+        }
+
+        .region-header span {
+            color: #666;
+            font-weight: 400;
+            font-size: 0.9rem;
+        }
+
+        /* ==================== WINERY CARDS ==================== */
+        .winery-card {
+            margin-bottom: 1rem;
+            padding: 1.1rem 1.25rem;
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-left: 3px solid #d1d5db;
+            font-size: 0.875rem;
+            border-radius: 6px;
+        }
+
+        .winery-card.featured {
+            border-left: 4px solid #CC0000;
+            background: #fef9f9;
+        }
+
+        .winery-name {
+            font-weight: 600;
+            font-size: 1rem;
+            color: #1a1a1a;
+            margin-bottom: 0.4rem;
+        }
+
+        .winery-name .featured-badge {
+            display: inline-block;
+            background: #CC0000;
+            color: white;
+            font-size: 0.65rem;
+            font-weight: 600;
+            padding: 1px 7px;
+            border-radius: 3px;
+            vertical-align: middle;
+            margin-left: 0.4rem;
+            letter-spacing: 0.03em;
+            text-transform: uppercase;
+        }
+
+        .winery-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.35rem 1.25rem;
+            margin-bottom: 0.5rem;
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        .winery-meta span {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .winery-detail {
+            margin: 0.25rem 0;
+            padding-left: 1rem;
+            position: relative;
+            color: #444;
+        }
+
+        .winery-detail:before {
+            content: "\25B8";
+            position: absolute;
+            left: 0;
+            color: #CC0000;
+            font-weight: bold;
+        }
+
+        .winery-detail strong {
+            color: #333;
+        }
+
+        .insider-tip {
+            margin-top: 0.6rem;
+            padding: 0.6rem 0.85rem;
+            background: #f5f5f5;
+            border-left: 3px solid #999;
+            border-radius: 4px;
+            font-size: 0.82rem;
+            color: #555;
+        }
+
+        .insider-tip strong {
+            color: #CC0000;
+            font-weight: 600;
+        }
+
+        .winery-card.featured .insider-tip {
+            background: #fef2f2;
+            border-left-color: #CC0000;
+        }
+
+        /* ==================== PRO TIPS ==================== */
+        .pro-tip {
+            background: #f9fafb;
+            border-left: 4px solid #CC0000;
+            padding: 1.1rem 1.25rem;
+            margin: 1.5rem 0;
+            font-size: 0.875rem;
+            border-radius: 6px;
+            border: 1px solid #e5e7eb;
+            border-left: 4px solid #CC0000;
+            color: #444;
+        }
+
+        .pro-tip-title {
+            font-weight: 600;
+            color: #CC0000;
+            margin-bottom: 0.4rem;
+            font-size: 0.95rem;
+        }
+
+        /* ==================== ITINERARIES ==================== */
+        .itineraries-header {
+            background: #f3f4f6;
+            color: #333;
+            padding: 1rem 1.5rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            border-radius: 6px;
+            border-left: 4px solid #CC0000;
+        }
+
+        .itinerary-card {
+            margin-bottom: 1rem;
+            padding: 1.1rem 1.25rem;
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-left: 3px solid #CC0000;
+            border-radius: 6px;
+        }
+
+        .itinerary-name {
+            font-weight: 600;
+            font-size: 1rem;
+            color: #1a1a1a;
+            margin-bottom: 0.15rem;
+        }
+
+        .itinerary-name .route-type {
+            display: inline-block;
+            background: #f3f4f6;
+            color: #555;
+            font-size: 0.7rem;
+            font-weight: 500;
+            padding: 2px 8px;
+            border-radius: 3px;
+            vertical-align: middle;
+            margin-left: 0.4rem;
+        }
+
+        .itinerary-meta {
+            font-size: 0.8rem;
+            color: #666;
+            margin-bottom: 0.5rem;
+        }
+
+        .itinerary-route {
+            font-size: 0.9rem;
+            color: #333;
+            font-weight: 500;
+            margin: 0.4rem 0;
+            padding: 0.5rem 0.75rem;
+            background: #f9fafb;
+            border-radius: 4px;
+        }
+
+        .itinerary-route .arrow {
+            color: #CC0000;
+            font-weight: 700;
+            margin: 0 0.25rem;
+        }
+
+        .itinerary-detail {
+            font-size: 0.82rem;
+            color: #555;
+            margin-top: 0.35rem;
+        }
+
+        /* ==================== PRICING TABLE ==================== */
+        .pricing-section {
+            margin: 2rem 0;
+        }
+
+        .pricing-header {
+            background: #f3f4f6;
+            color: #333;
+            padding: 1rem 1.5rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            border-radius: 6px;
+            border-left: 4px solid #CC0000;
+        }
+
+        .pricing-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.875rem;
+            margin-bottom: 0.75rem;
+            border-radius: 6px;
+            overflow: hidden;
+            border: 1px solid #e5e7eb;
+        }
+
+        .pricing-table th {
+            background: #CC0000;
+            color: white;
+            padding: 0.7rem 1rem;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.82rem;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+        }
+
+        .pricing-table td {
+            padding: 0.65rem 1rem;
+            border-bottom: 1px solid #e5e7eb;
+            color: #444;
+        }
+
+        .pricing-table tr:nth-child(even) td {
+            background: #f9fafb;
+        }
+
+        .pricing-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .pricing-table td:nth-child(3) {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .pricing-note {
+            font-size: 0.78rem;
+            color: #888;
+            margin-top: 0.5rem;
+        }
+
+        /* ==================== FOOTER ==================== */
+        .footer {
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 2px solid #e5e7eb;
+            text-align: center;
+            font-size: 0.875rem;
+            color: #666;
+        }
+
+        .footer-bold {
+            font-weight: 700;
+            color: #CC0000;
+            margin-bottom: 0.75rem;
+            font-size: 1rem;
+        }
+
+        .footer p {
+            margin-bottom: 0.35rem;
+        }
+
+        /* ==================== UTILITIES ==================== */
+        .page-break {
+            page-break-after: always;
+        }
+
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        @media (max-width: 640px) {
+            .two-column {
+                grid-template-columns: 1fr;
+            }
+            .legend-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ==================== HEADER ==================== -->
+    <div class="header">
+        <h1>Virginia Wine Tour Insider's Guide</h1>
+        <div class="subtitle">Complete Winery Reference with Insider Tips</div>
+        <div class="tagline">25+ Years of Local Driver Experience</div>
+    </div>
+
+    <!-- ==================== INTRO ==================== -->
+    <div class="intro-box">
+        <strong>Welcome!</strong> This guide contains real insights from TNT Limousine drivers who've driven these wine country routes for years. We've included tasting details, insider tips, and local knowledge you won't find on tourism websites. Whether you're planning a couples' getaway or a group celebration, this is your roadmap to Virginia wine country. Enjoy the wine!
+    </div>
+
+    <!-- ==================== LEGEND ==================== -->
+    <div class="legend">
+        <div class="legend-title">GUIDE LEGEND &amp; QUICK REFERENCE</div>
+        <div class="legend-grid">
+            <div class="legend-item"><span class="featured-dot"></span> Featured Winery (driver favorite)</div>
+            <div class="legend-item"><strong>Typical Tasting Fee:</strong>&nbsp; $15 - $20 per flight</div>
+            <div class="legend-item"><strong>Best Seasons:</strong>&nbsp; April - November</div>
+        </div>
+    </div>
+
+    <!-- ================================================================== -->
+    <!-- REGION 1: MONTICELLO AVA / CHARLOTTESVILLE                         -->
+    <!-- ================================================================== -->
+    <div class="region-section">
+        <div class="region-header">REGION 1: MONTICELLO AVA / CHARLOTTESVILLE <span>-- 15 Wineries</span></div>
+
+        <!-- 1. King Family Vineyards -->
+        <div class="winery-card featured">
+            <div class="winery-name">King Family Vineyards <span class="featured-badge">Featured</span></div>
+            <div class="winery-meta">
+                <span>Crozet, VA</span>
+                <span>~75 min from Richmond</span>
+                <span>$20 tasting flights</span>
+                <span>Daily 10am - 5:30pm</span>
+            </div>
+            <div class="winery-detail"><strong>Signature Wines:</strong> Cros&eacute; (their famous ros&eacute;), Viognier, Meritage</div>
+            <div class="winery-detail"><strong>Features:</strong> Working polo field on the property, panoramic Blue Ridge Mountain views, gourmet food menu on-site</div>
+            <div class="insider-tip">
+                <strong>Insider Tip:</strong> Visit on a weekday if you can. Weekends draw bachelorette crowds and the tasting room gets loud. Tuesdays are practically empty -- you'll get real time with the staff and can actually hear yourself think. Sunday polo matches (summer) are worth timing around.
+            </div>
+        </div>
+
+        <!-- 2. Barboursville Vineyards -->
+        <div class="winery-card featured">
+            <div class="winery-name">Barboursville Vineyards <span class="featured-badge">Featured</span></div>
+            <div class="winery-meta">
+                <span>Barboursville, VA</span>
+                <span>~70 min from Richmond</span>
+            </div>
+            <div class="winery-detail"><strong>Signature Wines:</strong> Octagon (flagship Bordeaux-style blend)</div>
+            <div class="winery-detail"><strong>Features:</strong> Ruins of Governor Barbour's mansion designed by Thomas Jefferson, Palladio restaurant on-site, owned by the Zonin family of Italy since 1976</div>
+            <div class="insider-tip">
+                <strong>Insider Tip:</strong> The Jefferson ruins alone are worth the drive -- most guests spend 20 minutes just walking the grounds. Palladio is one of the best Italian restaurants in the state, so plan lunch here if your schedule allows. This is old-world Virginia wine at its best.
+            </div>
+        </div>
+
+        <!-- 3. Blenheim Vineyards -->
+        <div class="winery-card">
+            <div class="winery-name">Blenheim Vineyards</div>
+            <div class="winery-meta">
+                <span>Charlottesville, VA</span>
+                <span>~75 min from Richmond</span>
+            </div>
+            <div class="winery-detail"><strong>Signature Wines:</strong> Cabernet Franc, Viognier</div>
+            <div class="winery-detail"><strong>Features:</strong> Owned by Dave Matthews, eco-friendly winemaking practices, occasional live music events</div>
+            <div class="insider-tip">
+                <strong>Insider Tip:</strong> Yes, it's the Dave Matthews winery, but don't dismiss it as a celebrity vanity project. The wines are serious and the tasting room staff are genuinely knowledgeable. The Cab Franc consistently punches above its weight.
+            </div>
+        </div>
+
+        <!-- 4. Pippin Hill Farm -->
+        <div class="winery-card">
+            <div class="winery-name">Pippin Hill Farm &amp; Vineyards</div>
+            <div class="winery-meta">
+                <span>North Garden, VA</span>
+                <span>~80 min from Richmond</span>
+            </div>
+            <div class="winery-detail"><strong>Features:</strong> Garden-to-table dining, cooking classes, stunning event space, immaculate landscaped grounds</div>
+            <div class="insider-tip">
+                <strong>Insider Tip:</strong> Best stop for couples and foodies. The culinary program here is the real draw -- the food rivals the wine. Book a cooking class in advance if that's your thing. Popular wedding venue, so weekends can be busy with private events.
+            </div>
+        </div>
+
+        <!-- 5. Veritas Vineyard -->
+        <div class="winery-card featured">
+            <div class="winery-name">Veritas Vineyard &amp; Winery <span class="featured-badge">Featured</span></div>
+            <div class="winery-meta">
+                <span>Afton, VA</span>
+                <span>~85 min from Richmond</span>
+            </div>
+            <div class="winery-detail"><strong>Signature Wines:</strong> Petit Verdot, Chardonnay, Claret</div>
+            <div class="winery-detail"><strong>Winemaker:</strong> Emily Hodson</div>
+            <div class="winery-detail"><strong>Features:</strong> Sweeping Blue Ridge views, serious winemaking with a relaxed farmhouse vibe</div>
+            <div class="insider-tip">
+                <strong>Insider Tip:</strong> This is where wine people go when they want great wine without the scene. Emily Hodson is one of the most respected winemakers in the state. The Petit Verdot is a standout. Bring a picnic blanket -- the lawn is perfect for it.
+            </div>
+        </div>
+
+        <!-- 6. Eastwood Farm & Winery -->
+        <div class="winery-card">
+            <div class="winery-name">Eastwood Farm &amp; Winery</div>
+            <div class="winery-meta">
+                <span>Charlottesville, VA</span>
+                <span>~70 min from Richmond</span>
+                <span>Open 7 days</span>
+            </div>
+            <div class="winery-detail"><strong>Features:</strong> Wine, craft beer, and hard cider all on one property. Dog-friendly. Chef Andrew Partridge runs the kitchen.</div>
+            <div class="insider-tip">
+                <strong>Insider Tip:</strong> The best stop when your group can't agree on what to drink. Wine snobs, beer people, cider fans -- everyone's covered. The dog-friendly policy makes it relaxed and easygoing. Great fallback when you need something for everyone.
+            </div>
+        </div>
+
+        <!-- 7. Merrie Mill Farm -->
+        <div class="winery-card featured">
+            <div class="winery-name">Merrie Mill Farm &amp; Vineyard <span class="featured-badge">Featured</span></div>
+            <div class="winery-meta">
+                <span>Keswick, VA</span>
+                <span>~75 min from Richmond</span>
+            </div>
+            <div class="winery-detail"><strong>Features:</strong> Most Instagrammable winery in the region, 5,000 sq ft tasting room, Sundowners event series, Blues &amp; Jazz nights</div>
+            <div class="insider-tip">
+                <strong>Insider Tip:</strong> If anyone in your group cares about photos, this is the stop. The property is stunning from every angle. The 5,000-square-foot tasting room is brand new and gorgeous. Check their calendar for Sundowners or Jazz nights -- they're special events worth planning around.
+            </div>
+        </div>
+
+        <!-- 8. Stinson Vineyards -->
+        <div class="winery-card">
+            <div class="winery-name">Stinson Vineyards</div>
+            <div class="winery-meta">
+                <span>Crozet, VA</span>
+                <span>~75 min from Richmond</span>
+            </div>
+            <div class="winery-detail"><strong>Signature Wines:</strong> Bordeaux-inspired blends</div>
+            <div class="winery-detail"><strong>Features:</strong> True garagiste operation -- started in a three-car garage. Blue Ridge views, B&amp;B on property.</div>
+            <div class="insider-tip">
+                <strong>Insider Tip:</strong> This is the small-batch artisan pick. The three-car-garage origin story is real, and you can taste the hands-on craftsmanship. Intimate setting, no crowds. If you value winemaker connection over Instagram moments, put this on the list.
+            </div>
+        </div>
+
+        <!-- 9. Early Mountain Vineyards -->
+        <div class="winery-card featured">
+            <div class="winery-name">Early Mountain Vineyards <span class="featured-badge">Featured</span></div>
+            <div class="winery-meta">
+                <span>Madison, VA</span>
+                <span>~80 min from Richmond</span>
+            </div>
+            <div class="winery-detail"><strong>Winemaker:</strong> Maya Hood White</div>
+            <div class="winery-detail"><strong>Features:</strong> Consistently rated top tasting room in Virginia, low-impact viticulture, curated Virginia wine selection beyond their own bottles</div>
+            <div class="insider-tip">
+                <strong>Insider Tip:</strong> If you only visit one winery in Virginia, make it this one. Maya Hood White is arguably the best winemaker in the state. The tasting room also pours wines from other top Virginia producers, so you get a broad education in one stop. This is the best of Virginia wine, period.
+            </div>
+        </div>
+
+        <!-- 10. Southwest Mountains Vineyards -->
+        <div class="winery-card">
+            <div class="winery-name">Southwest Mountains Vineyards</div>
+            <div class="winery-meta">
+                <span>Keswick, VA</span>
+                <span>~70 min from Richmond</span>
+            </div>
+            <div class="winery-detail"><strong>Winemaker:</strong> Boela Gerber (22 years of winemaking experience in South Africa)</div>
+            <div class="winery-detail"><strong>Features:</strong> Restored 1903 barn as tasting room, set in Virginia horse country</div>
+            <div class="insider-tip">
+                <strong>Insider Tip:</strong> Most people haven't heard of this one, which is exactly the point. A South African winemaker with over two decades of experience, pouring in a restored 1903 barn? That's bragging rights for your group. Tell your friends you discovered it before everyone else.
+            </div>
+        </div>
+
+        <!-- 11. Hazy Mountain Vineyard & Brewery -->
+        <div class="winery-card">
+            <div class="winery-name">Hazy Mountain Vineyard &amp; Brewery</div>
+            <div class="winery-meta">
+                <span>Afton, VA</span>
+                <span>~85 min from Richmond</span>
+            </div>
+            <div class="winery-detail"><strong>Features:</strong> Secret Supper Club events, on-site brewery, stone-fired pizza</div>
+            <div class="insider-tip">
+                <strong>Insider Tip:</strong> Wine plus beer plus stone-fired pizza -- it's a triple threat. The Secret Supper Club is exactly what it sounds like: limited-seat, multi-course dinners that sell out fast. If you see availability, book it. Otherwise, the pizza alone is worth the stop.
+            </div>
+        </div>
+
+        <!-- 12. Horton Vineyards -->
+        <div class="winery-card">
+            <div class="winery-name">Horton Vineyards</div>
+            <div class="winery-meta">
+                <span>Gordonsville, VA</span>
+                <span>~65 min from Richmond</span>
+                <span>Est. 1989</span>
+            </div>
+            <div class="winery-detail"><strong>Signature Wines:</strong> Virginia Viognier (they pioneered it), Rkatsiteli (ancient Georgian grape), Wildkat</div>
+            <div class="winery-detail"><strong>Features:</strong> The original Virginia Viognier producer, home to unusual and rare grape varieties you won't find elsewhere in the state</div>
+            <div class="insider-tip">
+                <strong>Insider Tip:</strong> Dennis Horton basically put Virginia Viognier on the map. If you want to taste grapes you've never heard of -- like Rkatsiteli, an 8,000-year-old Georgian variety -- this is the only place in the region doing it. Wine nerds love this stop.
+            </div>
+        </div>
+
+        <!-- 13. Afton Mountain Vineyards -->
+        <div class="winery-card">
+            <div class="winery-name">Afton Mountain Vineyards</div>
+            <div class="winery-meta">
+                <span>Afton, VA</span>
+                <span>~85 min from Richmond</span>
+            </div>
+            <div class="winery-detail"><strong>Features:</strong> 360-degree panoramic mountain views, vines planted since the 1970s -- one of Virginia's oldest vineyard sites</div>
+            <div class="insider-tip">
+                <strong>Insider Tip:</strong> Old-guard Virginia wine with the most stunning panorama in the region. The 360-degree views are no exaggeration. Bring a camera. The vines here have decades of root depth, which translates to wines with real complexity. A quiet, contemplative stop.
+            </div>
+        </div>
+
+        <!-- 14. Glass House Winery -->
+        <div class="winery-card">
+            <div class="winery-name">Glass House Winery</div>
+            <div class="winery-meta">
+                <span>Free Union, VA</span>
+                <span>~80 min from Richmond</span>
+            </div>
+            <div class="winery-detail"><strong>Features:</strong> Tropical conservatory greenhouse tasting room, estate-grown wines, intimate and eclectic atmosphere</div>
+            <div class="insider-tip">
+                <strong>Insider Tip:</strong> Quirky and intimate -- you're tasting wine in a tropical greenhouse. It's a completely different vibe from every other winery on this list, and that's the charm. Small operation, so expect personal attention. Not for the group that wants a big scene.
+            </div>
+        </div>
+
+        <!-- 15. Mount Ida Reserve -->
+        <div class="winery-card">
+            <div class="winery-name">Mount Ida Reserve</div>
+            <div class="winery-meta">
+                <span>Near Charlottesville, VA</span>
+                <span>~75 min from Richmond</span>
+            </div>
+            <div class="winery-detail"><strong>Features:</strong> Situated on a 5,000-acre working farm, 27 acres of vineyard, true farm-to-glass winemaking</div>
+            <div class="insider-tip">
+                <strong>Insider Tip:</strong> Five thousand acres. That's not a typo. Driving onto this property feels like entering a different world. The scale is staggering, and the farm-to-glass philosophy is genuine -- everything is estate-grown. A memorable stop that feels a long way from the tasting-room circuit.
+            </div>
+        </div>
+    </div>
+
+    <!-- PRO TIP: Between Regions -->
+    <div class="pro-tip">
+        <div class="pro-tip-title">PRO TIP: Pacing Your Tour</div>
+        Visit 3-4 wineries max per tour. After that, palate fatigue sets in and everything starts tasting the same. Our drivers recommend starting with lighter whites and building toward bold reds as the day progresses. Drink water between stops. Your palate (and your head) will thank you.
+    </div>
+
+    <div class="page-break"></div>
+
+    <!-- ================================================================== -->
+    <!-- REGION 2: RICHMOND AREA                                            -->
+    <!-- ================================================================== -->
+    <div class="region-section">
+        <div class="region-header">REGION 2: RICHMOND AREA <span>-- 9 Wineries</span></div>
+
+        <!-- 16. Upper Shirley Vineyards -->
+        <div class="winery-card featured">
+            <div class="winery-name">Upper Shirley Vineyards <span class="featured-badge">Featured</span></div>
+            <div class="winery-meta">
+                <span>Charles City, VA</span>
+                <span>~35 min from Richmond</span>
+            </div>
+            <div class="winery-detail"><strong>Features:</strong> Perched on a scenic bend of the James River, tableside tasting service, expansive river views from every seat</div>
+            <div class="insider-tip">
+                <strong>Insider Tip:</strong> This is the special-occasion winery. The James River views are genuinely unmatched -- you're sitting on a bluff overlooking a wide bend in the river. Tableside service means you're not standing at a crowded bar. Anniversaries, proposals, milestone birthdays -- this is where you go.
+            </div>
+        </div>
+
+        <!-- 17. James River Cellars -->
+        <div class="winery-card">
+            <div class="winery-name">James River Cellars</div>
+            <div class="winery-meta">
+                <span>Glen Allen, VA</span>
+                <span>~20 min from Richmond</span>
+                <span>$5 tasting (13-15 varieties)</span>
+            </div>
+            <div class="winery-detail"><strong>Signature Wines:</strong> Gew&uuml;rztraminer</div>
+            <div class="winery-detail"><strong>Features:</strong> Exceptional value tasting -- $5 gets you 13 to 15 wine varieties. Closest quality winery to Richmond proper.</div>
+            <div class="insider-tip">
+                <strong>Insider Tip:</strong> A genuine local gem. Five dollars for up to 15 wines is the best tasting deal in the region. Only 20 minutes from Richmond, so it's a perfect first stop to warm up or last stop before heading home. The Gew&uuml;rztraminer is surprisingly good.
+            </div>
+        </div>
+
+        <!-- 18. New Kent Winery -->
+        <div class="winery-card">
+            <div class="winery-name">New Kent Winery</div>
+            <div class="winery-meta">
+                <span>New Kent, VA</span>
+                <span>~30 min from Richmond</span>
+            </div>
+            <div class="winery-detail"><strong>Winemaker:</strong> Tom Payette</div>
+            <div class="winery-detail"><strong>Features:</strong> Talleysville Brewing Company on-site -- wine and craft beer under one roof</div>
+            <div class="insider-tip">
+                <strong>Insider Tip:</strong> Tom Payette consults for wineries across the state, so the wine is solid. But the real selling point for mixed groups is the on-site brewery. Wine for some, beer for others, everyone's happy. Easy drive east of Richmond.
+            </div>
+        </div>
+
+        <!-- 19. Saud&eacute; Creek Vineyards -->
+        <div class="winery-card">
+            <div class="winery-name">Saud&eacute; Creek Vineyards</div>
+            <div class="winery-meta">
+                <span>Lanexa, VA</span>
+                <span>~40 min from Richmond</span>
+                <span>Wed-Mon 11am-6pm, Fri to 9pm</span>
+            </div>
+            <div class="winery-detail"><strong>Signature Wines:</strong> Saud&eacute; Creek Red, Pamunkey White</div>
+            <div class="winery-detail"><strong>Features:</strong> Rural setting, extended Friday hours, peaceful countryside atmosphere</div>
+            <div class="insider-tip">
+                <strong>Insider Tip:</strong> This is the "unplug and breathe" winery. If your group wants to slow down and decompress, Saud&eacute; Creek delivers. Friday evenings until 9pm are especially nice -- bring a blanket, grab a bottle, and watch the sun set. Closed Tuesdays.
+            </div>
+        </div>
+
+        <!-- 20. Jolene Family Winery -->
+        <div class="winery-card">
+            <div class="winery-name">Jolene Family Winery</div>
+            <div class="winery-meta">
+                <span>Richmond Area</span>
+                <span>~15 min from Richmond</span>
+            </div>
+            <div class="winery-detail"><strong>Features:</strong> Lakeside setting, greenhouse tasting area, rotating food trucks, RVA Cheese Girl collaboration</div>
+            <div class="insider-tip">
+                <strong>Insider Tip:</strong> The closest winery to the city, so it's the ultimate quick escape. The lakeside vibe, food trucks, and cheese boards feel like a mini-vacation that's 15 minutes away. Great for groups that don't want to commit to a full day in wine country.
+            </div>
+        </div>
+
+        <!-- 21. Ashton Creek Vineyard -->
+        <div class="winery-card">
+            <div class="winery-name">Ashton Creek Vineyard</div>
+            <div class="winery-meta">
+                <span>Chester, VA</span>
+                <span>~25 min from Richmond</span>
+            </div>
+            <div class="winery-detail"><strong>Winemaker:</strong> Alan Thibault</div>
+            <div class="winery-detail"><strong>Features:</strong> Kitchen on-site serving food to pair with tastings</div>
+            <div class="insider-tip">
+                <strong>Insider Tip:</strong> The south-side option. If your group is coming from south of the river, this saves you the drive north. Solid wines, on-site kitchen, and way less traffic than heading up to Charlottesville. Good for a relaxed half-day.
+            </div>
+        </div>
+
+        <!-- 22. 7 Lady Vineyards at Dover Hall -->
+        <div class="winery-card">
+            <div class="winery-name">7 Lady Vineyards at Dover Hall</div>
+            <div class="winery-meta">
+                <span>Manakin-Sabot, VA</span>
+                <span>~25 min from Richmond</span>
+            </div>
+            <div class="winery-detail"><strong>Features:</strong> Virginia and international wines on the menu, regular wine dinner events, elegant estate setting</div>
+            <div class="insider-tip">
+                <strong>Insider Tip:</strong> West-end events vibe. Dover Hall is a beautiful estate, and the wine dinners are popular with the corporate and social crowd. If your group wants something polished and event-driven, check their calendar. Good for team outings that need a refined setting.
+            </div>
+        </div>
+
+        <!-- 23. Fifty-Third Winery -->
+        <div class="winery-card">
+            <div class="winery-name">Fifty-Third Winery &amp; Vineyard</div>
+            <div class="winery-meta">
+                <span>Louisa, VA</span>
+                <span>~50 min from Richmond</span>
+                <span>Mon-Sun 11am-5pm</span>
+            </div>
+            <div class="winery-detail"><strong>Features:</strong> Heart of the Virginia Wine Trail, private tastings available, flexible for groups. Groups of 8+ call (540) 894-1536 to arrange.</div>
+            <div class="insider-tip">
+                <strong>Insider Tip:</strong> Midway point between Richmond and Charlottesville, which makes it ideal for flexible routing. You can add it to a Charlottesville itinerary or build a shorter day around it. Private tastings for groups are a nice touch. Accommodating staff.
+            </div>
+        </div>
+
+        <!-- 24. Cooper Vineyards -->
+        <div class="winery-card">
+            <div class="winery-name">Cooper Vineyards</div>
+            <div class="winery-meta">
+                <span>Louisa, VA</span>
+                <span>~50 min from Richmond</span>
+            </div>
+            <div class="winery-detail"><strong>Winemaker:</strong> Graham Bell</div>
+            <div class="winery-detail"><strong>Signature Wines:</strong> Noche (dessert wine)</div>
+            <div class="winery-detail"><strong>Features:</strong> Two-story glass tasting room, voted best tasting room 2012 &amp; 2013, Friday live music</div>
+            <div class="insider-tip">
+                <strong>Insider Tip:</strong> The two-story glass tasting room is an architecture destination in its own right. Even if you're not a wine person, the building is worth seeing. The Noche dessert wine is their standout -- sweet, rich, and a great conversation piece. Friday music nights are lively.
+            </div>
+        </div>
+    </div>
+
+    <!-- PRO TIP: Richmond Area -->
+    <div class="pro-tip">
+        <div class="pro-tip-title">PRO TIP: Richmond Area Strategy</div>
+        Richmond Area wineries are perfect for half-day tours or as first and last stops on a Charlottesville day trip. Upper Shirley or James River Cellars make an excellent finale on the way home -- close to the city, no long drive ahead of you, and a relaxed way to end the day.
+    </div>
+
+    <div class="page-break"></div>
+
+    <!-- ================================================================== -->
+    <!-- CURATED ITINERARIES                                                -->
+    <!-- ================================================================== -->
+    <div class="itineraries-header">CURATED ITINERARIES -- Driver-Recommended Routes</div>
+
+    <div class="itinerary-card">
+        <div class="itinerary-name">Route 1: The Charlottesville Classic <span class="route-type">Full Day</span></div>
+        <div class="itinerary-meta">Best for first-timers | ~70 min to first stop | ~6 hours total</div>
+        <div class="itinerary-route">
+            King Family Vineyards <span class="arrow">&rarr;</span> Stinson Vineyards <span class="arrow">&rarr;</span> Lunch Break <span class="arrow">&rarr;</span> Merrie Mill Farm
+        </div>
+        <div class="itinerary-detail">The crowd-pleaser route. Start at King Family for Blue Ridge views and that famous Cros&eacute;, hit Stinson for the intimate garagiste experience, break for lunch, then finish at Merrie Mill for the visual wow factor. Three wineries, no rush, perfect day.</div>
+    </div>
+
+    <div class="itinerary-card">
+        <div class="itinerary-name">Route 2: The Afton Mountain Run <span class="route-type">Full Day</span></div>
+        <div class="itinerary-meta">Best for scenic drives &amp; serious wine | ~85 min to first stop | ~6.5 hours total</div>
+        <div class="itinerary-route">
+            Veritas Vineyard <span class="arrow">&rarr;</span> Afton Mountain Vineyards <span class="arrow">&rarr;</span> Hazy Mountain <span class="arrow">&rarr;</span> Stinson or King Family
+        </div>
+        <div class="itinerary-detail">The scenic route for people who came for the wine. Start at Veritas for serious winemaking, take in the 360-degree panorama at Afton Mountain, grab pizza and beer at Hazy Mountain, then close out at Stinson or King Family on the way down. Mountain roads all day.</div>
+    </div>
+
+    <div class="itinerary-card">
+        <div class="itinerary-name">Route 3: Richmond Quick Escape <span class="route-type">Half Day</span></div>
+        <div class="itinerary-meta">Best for quick local outings | 15-35 min to first stop | ~4 hours total</div>
+        <div class="itinerary-route">
+            Jolene Family Winery <span class="arrow">&rarr;</span> James River Cellars <span class="arrow">&rarr;</span> Upper Shirley Vineyards
+        </div>
+        <div class="itinerary-detail">No long drives required. Start at Jolene for the lakeside vibe and food trucks, swing through James River Cellars for the best tasting deal in the region ($5 for 15 wines), then finish with sunset views over the James at Upper Shirley. Half-day, no stress.</div>
+    </div>
+
+    <div class="itinerary-card">
+        <div class="itinerary-name">Route 4: The Group Celebration <span class="route-type">Full Day</span></div>
+        <div class="itinerary-meta">Best for bachelorettes, birthdays &amp; corporate | ~70 min to first stop | ~7 hours total</div>
+        <div class="itinerary-route">
+            Eastwood Farm <span class="arrow">&rarr;</span> Blenheim Vineyards <span class="arrow">&rarr;</span> Merrie Mill Farm <span class="arrow">&rarr;</span> King Family Vineyards
+        </div>
+        <div class="itinerary-detail">Designed for groups that want energy and variety. Eastwood has something for every palate (wine, beer, cider). Blenheim gives you the Dave Matthews story. Merrie Mill is the photo op. King Family closes it out with polo views and that Cros&eacute;. Feeds the group, feeds the Instagram.</div>
+    </div>
+
+    <div class="itinerary-card">
+        <div class="itinerary-name">Route 5: The Connoisseur's Trail <span class="route-type">Full Day</span></div>
+        <div class="itinerary-meta">Best for experienced wine tasters | ~70 min to first stop | ~7 hours total</div>
+        <div class="itinerary-route">
+            Barboursville Vineyards <span class="arrow">&rarr;</span> Horton Vineyards <span class="arrow">&rarr;</span> Early Mountain Vineyards <span class="arrow">&rarr;</span> Southwest Mountains
+        </div>
+        <div class="itinerary-detail">The route for people who've been to Napa and want to see what Virginia can do. Start at Barboursville for the Octagon and the Jefferson ruins. Horton for rare grapes you've never heard of. Early Mountain for the best of Virginia wine, curated. Close at Southwest Mountains for the 1903 barn and the South African winemaker. This is the serious trail.</div>
+    </div>
+
+    <div class="pro-tip">
+        <div class="pro-tip-title">PRO TIP: Custom Routes</div>
+        These itineraries are starting points. Our drivers know the roads, the traffic patterns, and the seasonal schedules. Tell us what your group cares about -- views, food, serious wine, the party -- and we'll build a custom route. That's what 25 years of driving these roads gets you.
+    </div>
+
+    <div class="page-break"></div>
+
+    <!-- ================================================================== -->
+    <!-- VEHICLE PRICING                                                    -->
+    <!-- ================================================================== -->
+    <div class="pricing-section">
+        <div class="pricing-header">VEHICLE OPTIONS &amp; PRICING</div>
+
+        <table class="pricing-table">
+            <thead>
+                <tr>
+                    <th>Vehicle</th>
+                    <th>Capacity</th>
+                    <th>3-Hr Min Rate</th>
+                    <th>Best For</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Lincoln Sedan</td>
+                    <td>3 passengers</td>
+                    <td>$300</td>
+                    <td>Couples</td>
+                </tr>
+                <tr>
+                    <td>Lincoln Suburban</td>
+                    <td>6 passengers</td>
+                    <td>$372</td>
+                    <td>Small groups</td>
+                </tr>
+                <tr>
+                    <td>Ford Transit</td>
+                    <td>13 passengers</td>
+                    <td>$420</td>
+                    <td>Medium groups</td>
+                </tr>
+                <tr>
+                    <td>Mercedes Sprinter Limo</td>
+                    <td>11 passengers</td>
+                    <td>$531</td>
+                    <td>Upscale small groups</td>
+                </tr>
+                <tr>
+                    <td>Limo Bus (24-pax)</td>
+                    <td>24 passengers</td>
+                    <td>$624</td>
+                    <td>Large groups</td>
+                </tr>
+                <tr>
+                    <td>Limo Bus (34-pax)</td>
+                    <td>34 passengers</td>
+                    <td>$744</td>
+                    <td>Corporate / big celebrations</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="pricing-note">Rates are minimums for a 3-hour booking. Most wine tours run 5-7 hours. Gratuity not included. Contact us for a custom quote based on your group size and itinerary.</div>
+    </div>
+
+    <!-- ================================================================== -->
+    <!-- FOOTER                                                             -->
+    <!-- ================================================================== -->
+    <div class="footer">
+        <div class="footer-bold">TNT LIMOUSINE -- Richmond's Wine Tour Specialists Since 1999</div>
+        <p>Ready to book? Let us handle the driving so you can enjoy the tasting.</p>
+        <p>(804) 435-4225 &nbsp;|&nbsp; tntlimousine.com &nbsp;|&nbsp; sedan@tntauto.com</p>
+        <p style="margin-top: 12px; font-size: 0.75rem; color: #999;">
+            Winery hours, fees, and availability may change seasonally. Always confirm directly with each winery before visiting.
+            This guide is provided as a courtesy by TNT Limousine. &copy; 2026 TNT Limousine. All rights reserved.
+        </p>
+    </div>
+
+</body>
+</html>
