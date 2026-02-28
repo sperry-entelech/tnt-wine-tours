@@ -49,7 +49,7 @@
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             line-height: 1.6;
             color: #333;
-            background: #ffffff;
+            background: #eeecea;
             max-width: 8.5in;
             margin: 0 auto;
             padding: 0.5in;
@@ -88,13 +88,13 @@
 
         /* ==================== INTRO BOX ==================== */
         .intro-box {
-            background: #f9fafb;
-            padding: 1.5rem;
+            background: #f7f7f5;
+            padding: 1.25rem 1.5rem;
             border-left: 4px solid #CC0000;
             margin-bottom: 2rem;
             border-radius: 6px;
             font-size: 0.95rem;
-            border: 1px solid #e5e7eb;
+            border: 1px solid #e0ddd8;
             border-left: 4px solid #CC0000;
         }
 
@@ -104,12 +104,12 @@
 
         /* ==================== LEGEND ==================== */
         .legend {
-            background: #f9fafb;
+            background: #f7f7f5;
             padding: 1rem 1.25rem;
             border-radius: 6px;
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
             font-size: 0.875rem;
-            border: 1px solid #e5e7eb;
+            border: 1px solid #e0ddd8;
         }
 
         .legend-title {
@@ -143,30 +143,48 @@
 
         /* ==================== REGION SECTIONS ==================== */
         .region-section {
-            margin-bottom: 2rem;
+            margin-bottom: 3rem;
+            background: #f7f7f5;
+            border: 1px solid #e0ddd8;
+            border-radius: 10px;
+            padding: 1.5rem;
+            padding-top: 0;
+            overflow: hidden;
         }
 
         .region-header {
-            background: #f3f4f6;
-            color: #333;
-            padding: 1rem 1.5rem;
-            font-size: 1.1rem;
+            background: #1a1a1a;
+            color: #ffffff;
+            padding: 1.1rem 1.5rem;
+            font-size: 1rem;
             font-weight: 600;
-            margin-bottom: 1rem;
-            border-radius: 6px;
-            border-left: 4px solid #CC0000;
+            margin: 0 -1.5rem 1.25rem;
+            border-radius: 0;
+            letter-spacing: 0.04em;
         }
 
         .region-header span {
-            color: #666;
+            color: #999;
             font-weight: 400;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
+            margin-left: 0.5rem;
+        }
+
+        .region-count {
+            float: right;
+            background: #CC0000;
+            color: white;
+            font-size: 0.7rem;
+            padding: 2px 10px;
+            border-radius: 3px;
+            font-weight: 600;
+            letter-spacing: 0.03em;
         }
 
         /* ==================== WINERY CARDS ==================== */
         .winery-card {
-            margin-bottom: 1rem;
-            padding: 1.1rem 1.25rem;
+            margin-bottom: 0.75rem;
+            padding: 1rem 1.15rem;
             background: #ffffff;
             border: 1px solid #e5e7eb;
             border-left: 3px solid #d1d5db;
@@ -174,9 +192,13 @@
             border-radius: 6px;
         }
 
+        .winery-card:last-child {
+            margin-bottom: 0;
+        }
+
         .winery-card.featured {
             border-left: 4px solid #CC0000;
-            background: #fef9f9;
+            background: #fffbfb;
         }
 
         .winery-name {
@@ -256,10 +278,10 @@
 
         /* ==================== PRO TIPS ==================== */
         .pro-tip {
-            background: #f9fafb;
+            background: #ffffff;
             border-left: 4px solid #CC0000;
-            padding: 1.1rem 1.25rem;
-            margin: 1.5rem 0;
+            padding: 1rem 1.15rem;
+            margin: 0.75rem 0 0;
             font-size: 0.875rem;
             border-radius: 6px;
             border: 1px solid #e5e7eb;
@@ -275,24 +297,37 @@
         }
 
         /* ==================== ITINERARIES ==================== */
+        .itineraries-section {
+            margin-bottom: 3rem;
+            background: #f7f7f5;
+            border: 1px solid #e0ddd8;
+            border-radius: 10px;
+            padding: 1.5rem;
+            padding-top: 0;
+            overflow: hidden;
+        }
+
         .itineraries-header {
-            background: #f3f4f6;
-            color: #333;
-            padding: 1rem 1.5rem;
-            font-size: 1.1rem;
+            background: #1a1a1a;
+            color: #ffffff;
+            padding: 1.1rem 1.5rem;
+            font-size: 1rem;
             font-weight: 600;
-            margin-bottom: 1rem;
-            border-radius: 6px;
-            border-left: 4px solid #CC0000;
+            margin: 0 -1.5rem 1.25rem;
+            letter-spacing: 0.04em;
         }
 
         .itinerary-card {
-            margin-bottom: 1rem;
-            padding: 1.1rem 1.25rem;
+            margin-bottom: 0.75rem;
+            padding: 1rem 1.15rem;
             background: #ffffff;
             border: 1px solid #e5e7eb;
             border-left: 3px solid #CC0000;
             border-radius: 6px;
+        }
+
+        .itinerary-card:last-of-type {
+            margin-bottom: 0;
         }
 
         .itinerary-name {
@@ -344,18 +379,23 @@
 
         /* ==================== PRICING TABLE ==================== */
         .pricing-section {
-            margin: 2rem 0;
+            margin: 2rem 0 3rem;
+            background: #f7f7f5;
+            border: 1px solid #e0ddd8;
+            border-radius: 10px;
+            padding: 1.5rem;
+            padding-top: 0;
+            overflow: hidden;
         }
 
         .pricing-header {
-            background: #f3f4f6;
-            color: #333;
-            padding: 1rem 1.5rem;
-            font-size: 1.1rem;
+            background: #1a1a1a;
+            color: #ffffff;
+            padding: 1.1rem 1.5rem;
+            font-size: 1rem;
             font-weight: 600;
-            margin-bottom: 1rem;
-            border-radius: 6px;
-            border-left: 4px solid #CC0000;
+            margin: 0 -1.5rem 1.25rem;
+            letter-spacing: 0.04em;
         }
 
         .pricing-table {
@@ -408,7 +448,7 @@
         .footer {
             margin-top: 3rem;
             padding-top: 1.5rem;
-            border-top: 2px solid #e5e7eb;
+            border-top: 2px solid #d5d2cd;
             text-align: center;
             font-size: 0.875rem;
             color: #666;
@@ -683,13 +723,13 @@
                 <strong>Insider Tip:</strong> 5,000-acre working farm with 27 acres of vineyard. Everything is estate-grown. The scale sets it apart from the usual tasting-room circuit.
             </div>
         </div>
-    </div>
 
-    <!-- PRO TIP: Between Regions -->
     <div class="pro-tip">
         <div class="pro-tip-title">PRO TIP: Pacing Your Tour</div>
-        Visit 3-4 wineries max per tour. After that, palate fatigue sets in and everything starts tasting the same. Our drivers recommend starting with lighter whites and building toward bold reds as the day progresses. Drink water between stops. Your palate (and your head) will thank you.
+        Visit 3-4 wineries max per tour. After that, palate fatigue sets in and everything starts tasting the same. Start with lighter whites and build toward bold reds as the day progresses. Drink water between stops.
     </div>
+
+    </div><!-- /region-section -->
 
     <div class="page-break"></div>
 
@@ -824,19 +864,20 @@
                 <strong>Insider Tip:</strong> The two-story glass tasting room is an architecture destination in its own right. Even if you're not a wine person, the building is worth seeing. The Noche dessert wine is their standout -- sweet, rich, and a great conversation piece. Friday music nights are lively.
             </div>
         </div>
-    </div>
 
-    <!-- PRO TIP: Richmond Area -->
     <div class="pro-tip">
         <div class="pro-tip-title">PRO TIP: Richmond Area Strategy</div>
-        Richmond Area wineries are perfect for half-day tours or as first and last stops on a Charlottesville day trip. Upper Shirley or James River Cellars make an excellent finale on the way home -- close to the city, no long drive ahead of you, and a relaxed way to end the day.
+        Richmond-area wineries work well for half-day tours or as first/last stops on a Charlottesville day trip. Upper Shirley or James River Cellars make a solid finale — close to the city, no long drive ahead.
     </div>
+
+    </div><!-- /region-section -->
 
     <div class="page-break"></div>
 
     <!-- ================================================================== -->
     <!-- CURATED ITINERARIES                                                -->
     <!-- ================================================================== -->
+    <div class="itineraries-section">
     <div class="itineraries-header">CURATED ITINERARIES -- Driver-Recommended Routes</div>
 
     <div class="itinerary-card">
@@ -888,6 +929,8 @@
         <div class="pro-tip-title">PRO TIP: Custom Routes</div>
         These itineraries are starting points. Tell us what your group cares about -- views, food, serious wine, the party -- and we'll build a custom route.
     </div>
+
+    </div><!-- /itineraries-section -->
 
     <div class="page-break"></div>
 
