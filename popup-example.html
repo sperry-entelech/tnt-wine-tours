@@ -246,8 +246,8 @@
         <p><strong>Technical Note:</strong> The popup should trigger 3 seconds after page load or on exit intent. It uses cookies to show only once per 24 hours.</p>
     </div>
 
-    <!-- THE ACTUAL POPUP -->
-    <div class="popup-overlay" id="winetoursPopup">
+    <!-- THE ACTUAL POPUP — starts hidden, shown by JS after cookie check -->
+    <div class="popup-overlay" id="winetoursPopup" style="display: none;">
         <div class="popup-container">
             <!-- Close Button -->
             <button class="popup-close" onclick="closePopup()">&times;</button>
@@ -272,10 +272,10 @@
 
                 <!-- Buttons -->
                 <div class="popup-buttons">
-                    <a href="https://www.tntlimousine.com/wine-tour-guide" class="popup-btn popup-btn-secondary">
+                    <a href="landing-page.html#form" class="popup-btn popup-btn-secondary" onclick="closePopup()">
                         Get Free Wine Tour Guide
                     </a>
-                    <a href="https://www.tntlimousine.com/wine-tours#booking" class="popup-btn popup-btn-primary">
+                    <a href="https://www.tntlimousine.com/reservation" class="popup-btn popup-btn-primary" onclick="closePopup()">
                         Book Your Tour Now
                     </a>
                 </div>
@@ -291,28 +291,28 @@
 
     <script>
         // ===============================================
-        // POPUP FUNCTIONALITY
+        // POPUP FUNCTIONALITY — Cookie-gated, shows once per 24 hours
         // ===============================================
+
+        var popupShown = false;
+
+        function showPopup() {
+            if (popupShown) return;
+            var popup = document.getElementById('winetoursPopup');
+            popup.style.display = 'flex';
+            popupShown = true;
+            // Set cookie so it won't show again for 24 hours
+            document.cookie = "tnt_winetours_popup=shown; max-age=86400; path=/";
+        }
 
         function closePopup() {
             document.getElementById('winetoursPopup').style.display = 'none';
-
-            // JTZ: Track close event if analytics available
-            // if (typeof gtag !== 'undefined') {
-            //     gtag('event', 'popup_closed_x', { event_category: 'Wine Tours Popup' });
-            // }
         }
 
         function dontShowAgain() {
-            // Set cookie to not show popup for 24 hours
-            document.cookie = "tnt_winetours_popup=hidden; max-age=86400; path=/";
+            // Set cookie for 30 days instead of 24 hours
+            document.cookie = "tnt_winetours_popup=hidden; max-age=2592000; path=/";
             closePopup();
-            alert('Got it! We won\'t show this popup again today.');
-
-            // JTZ: Track dont-show event if analytics available
-            // if (typeof gtag !== 'undefined') {
-            //     gtag('event', 'popup_dont_show', { event_category: 'Wine Tours Popup' });
-            // }
         }
 
         // Close popup when clicking outside
@@ -329,62 +329,36 @@
             }
         });
 
+        // --- TRIGGER LOGIC ---
+        // Only show if cookie is not set
+        if (document.cookie.indexOf('tnt_winetours_popup') === -1) {
+            // Don't show on mobile (< 500px)
+            if (window.innerWidth >= 500) {
+                // Show after 3 seconds on page load
+                setTimeout(showPopup, 3000);
+
+                // Also show on exit intent (mouse leaving viewport)
+                document.addEventListener('mouseout', function(e) {
+                    if (e.clientY < 0) {
+                        showPopup();
+                    }
+                });
+            }
+        }
+
         /*
         ===============================================
-        IMPLEMENTATION NOTES FOR JTZ:
+        NOTES FOR JTZ:
         ===============================================
-
-        1. TRIGGER CONDITIONS:
-           - Show popup 3 seconds after page load
-           - OR show on exit intent (mouse leaving viewport)
-           - Check cookie first: if "tnt_winetours_popup" exists, don't show
-           - Example check:
-             if (document.cookie.indexOf('tnt_winetours_popup') === -1) {
-                 setTimeout(showPopup, 3000);
-             }
-
-        2. PAGES TO SHOW ON:
-           - Homepage (tntlimousine.com)
-           - Main service pages
-           - NOT on: /wine-tours page (they're already there!)
-           - Example exclusion:
-             if (window.location.pathname !== '/wine-tours') { ... }
-
-        3. PROMO CODE:
-           - Code: WINETOUR
-           - 10% off first wine tour booking
-           - Can be auto-applied via URL param or shown in confirmation
-
-        4. TRACKING (if analytics available):
-           - Track impression: popup_shown
-           - Track clicks: popup_guide_clicked, popup_book_clicked
-           - Track close method: popup_closed_x, popup_closed_overlay, popup_dont_show
-           - Event category: "Wine Tours Popup"
-
-        5. MOBILE CONSIDERATIONS:
-           - Don't show on screens < 500px width (too intrusive)
-           - OR use a simpler banner instead of popup
-           - The CSS already handles responsive layout via media queries
-
-        6. BUTTON LINKS TO UPDATE:
-           - "Get Free Wine Tour Guide" → wine tour landing page or guide download
-             Currently: https://www.tntlimousine.com/wine-tour-guide
-           - "Book Your Tour Now" → booking page or contact form
-             Currently: https://www.tntlimousine.com/wine-tours#booking
-             If no booking system: link to contact form with subject="Wine Tour Booking"
-
-        7. COOKIE:
-           - Name: tnt_winetours_popup
-           - Expiry: 24 hours (86400 seconds)
-           - Path: / (site-wide)
-
-        8. EXIT INTENT EXAMPLE:
-           document.addEventListener('mouseout', function(e) {
-               if (e.clientY < 0 && !popupShown) {
-                   showPopup();
-               }
-           });
-
+        - Cookie "tnt_winetours_popup" prevents re-showing for 24 hours
+        - "Don't show again" sets it for 30 days
+        - Popup does NOT show on mobile (< 500px) — too intrusive
+        - To exclude specific pages (e.g., wine tours page itself):
+          Wrap the trigger logic above in:
+          if (window.location.pathname !== '/wine-tours') { ... }
+        - Promo code: WINETOUR (10% off first wine tour)
+        - "Get Free Guide" button → landing-page.html#form (the lead capture form)
+        - "Book Your Tour Now" → /reservation (the booking page)
         */
     </script>
 </body>

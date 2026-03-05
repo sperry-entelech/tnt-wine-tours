@@ -613,11 +613,10 @@
             </div>
             <div class="header-right">
                 <nav class="header-nav">
-                    <!-- JTZ: Update these href values to match existing site pages -->
                     <a href="https://www.tntlimousine.com/fleet">Fleet</a>
-                    <a href="https://www.tntlimousine.com/services">Services</a>
-                    <a href="#" class="active">Wine Tours</a>
-                    <a href="https://www.tntlimousine.com/about">About</a>
+                    <a href="https://www.tntlimousine.com/winerybrewerytours" class="active">Wine Tours</a>
+                    <a href="https://www.tntlimousine.com/history">About</a>
+                    <a href="https://www.tntlimousine.com/contact">Contact</a>
                     <a href="https://www.tntlimousine.com/reservation" class="nav-cta">Book Now</a>
                 </nav>
                 <div class="header-badges">
@@ -776,10 +775,11 @@
         <div class="footer-about">
             <h3>About TNT Limousine</h3>
             <p>
-                We're a locally owned limousine company that's been serving Central Virginia since 1999. Our drivers have logged thousands of miles on the winding roads of Virginia wine country — they know every winery entrance, every scenic overlook, and every shortcut between tasting rooms. Whether you're planning a self-guided trip or want us behind the wheel so your whole group can enjoy the tastings, this guide is our gift to fellow wine lovers. No catch, just useful info from people who actually know these routes.
+                We're a locally owned limousine company that's been serving Central Virginia since 1991. Our drivers have logged thousands of miles on the winding roads of Virginia wine country — they know every winery entrance, every scenic overlook, and every shortcut between tasting rooms. Whether you're planning a self-guided trip or want us behind the wheel so your whole group can enjoy the tastings, this guide is our gift to fellow wine lovers. No catch, just useful info from people who actually know these routes.
             </p>
             <div class="footer-links">
                 <a href="https://www.tntlimousine.com/fleet" target="_blank">View Our Fleet</a>
+                <a href="https://www.tntlimousine.com/reservation" target="_blank">Make a Reservation</a>
                 <a href="https://www.tntlimousine.com" target="_blank">Visit Our Website</a>
             </div>
         </div>
@@ -792,18 +792,60 @@
     </div>
 
     <script>
-        // Form validation and enhancement
+        // Form submission — delivers the guide and captures the lead
         document.getElementById('winetours-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+
             // Basic phone number formatting
             const phoneInput = document.getElementById('phone');
             let phone = phoneInput.value.replace(/\D/g, '');
-
             if (phone.length === 10) {
                 phoneInput.value = '(' + phone.slice(0,3) + ') ' + phone.slice(3,6) + '-' + phone.slice(6);
             }
 
-            // JTZ: Your form handler will process the submission
-            // The default action will be to POST to your endpoint
+            // Collect form data
+            var formData = new FormData(this);
+            var data = {};
+            formData.forEach(function(value, key) { data[key] = value; });
+
+            // Store lead in localStorage as backup (JTZ: replace with real form handler POST)
+            var leads = JSON.parse(localStorage.getItem('tnt_wine_leads') || '[]');
+            data.submitted_at = new Date().toISOString();
+            leads.push(data);
+            localStorage.setItem('tnt_wine_leads', JSON.stringify(leads));
+
+            // Show success message, then redirect to the guide
+            var btn = this.querySelector('.submit-btn');
+            btn.textContent = 'Opening Your Guide...';
+            btn.disabled = true;
+            btn.style.background = '#28a745';
+
+            setTimeout(function() {
+                // Open the Insider Guide in a new tab
+                window.open('TNT-Wine-Tour-Insider-Guide.html', '_blank');
+
+                // Reset form and show confirmation
+                btn.textContent = 'Guide Delivered! Check Your New Tab';
+                setTimeout(function() {
+                    btn.textContent = 'Get My Free Guide Now';
+                    btn.disabled = false;
+                    btn.style.background = '';
+                }, 4000);
+            }, 800);
+
+            /*
+            JTZ: Replace the localStorage approach above with a real POST:
+            fetch('/your-form-handler', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            }).then(function() {
+                window.open('TNT-Wine-Tour-Insider-Guide.html', '_blank');
+            });
+
+            Or integrate with your existing form system (GHL, Mailchimp, etc.)
+            to capture the lead AND auto-send the guide PDF via email.
+            */
         });
 
         // Auto-format phone as user types
