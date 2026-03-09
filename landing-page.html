@@ -791,14 +791,29 @@
         <p>See our vehicles</p>
     </div>
 
+    <!-- Guide Delivery Popup — shown after form submit -->
+    <div id="guidePopup" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:10000; display:none; align-items:center; justify-content:center; padding:20px;">
+        <div style="background:#fff; border-radius:12px; max-width:520px; width:100%; padding:40px; text-align:center; box-shadow:0 10px 40px rgba(0,0,0,0.2); position:relative;">
+            <button onclick="document.getElementById('guidePopup').style.display='none'" style="position:absolute; top:12px; right:16px; background:none; border:none; font-size:24px; cursor:pointer; color:#666;">&times;</button>
+            <div style="font-size:3em; margin-bottom:15px;">&#127863;</div>
+            <h2 style="font-size:1.6em; color:#111; margin-bottom:10px;">Your Guide is Ready!</h2>
+            <p style="color:#555; margin-bottom:25px; line-height:1.6;">Thanks, <span id="guidePopupName"></span>. Your Virginia Wine Country Insider's Guide is ready to view. Tap the button below to open it.</p>
+            <a href="TNT-Wine-Tour-Insider-Guide.html" target="_blank" style="display:inline-block; padding:16px 40px; background:#CC0000; color:#fff; text-decoration:none; border-radius:6px; font-weight:600; font-size:1.1em; margin-bottom:15px;">Open My Free Guide</a>
+            <p style="color:#888; font-size:0.85em; margin-top:15px;">You can also bookmark it to read later.<br>We'll follow up by email with a copy.</p>
+            <div style="margin-top:20px; padding-top:15px; border-top:1px solid #eee;">
+                <p style="color:#999; font-size:0.8em;">Ready to book your tour? Call <strong style="color:#CC0000;">(804) 409-2595</strong></p>
+            </div>
+        </div>
+    </div>
+
     <script>
-        // Form submission — delivers the guide and captures the lead
+        // Form submission — shows guide delivery popup
         document.getElementById('winetours-form').addEventListener('submit', function(e) {
             e.preventDefault();
 
             // Basic phone number formatting
-            const phoneInput = document.getElementById('phone');
-            let phone = phoneInput.value.replace(/\D/g, '');
+            var phoneInput = document.getElementById('phone');
+            var phone = phoneInput.value.replace(/\D/g, '');
             if (phone.length === 10) {
                 phoneInput.value = '(' + phone.slice(0,3) + ') ' + phone.slice(3,6) + '-' + phone.slice(6);
             }
@@ -808,44 +823,40 @@
             var data = {};
             formData.forEach(function(value, key) { data[key] = value; });
 
-            // Store lead in localStorage as backup (JTZ: replace with real form handler POST)
+            // Store lead in localStorage (JTZ: replace with real POST to your form handler)
             var leads = JSON.parse(localStorage.getItem('tnt_wine_leads') || '[]');
             data.submitted_at = new Date().toISOString();
             leads.push(data);
             localStorage.setItem('tnt_wine_leads', JSON.stringify(leads));
 
-            // Show success message, then redirect to the guide
+            // Show the guide delivery popup
+            var firstName = document.getElementById('firstName').value;
+            document.getElementById('guidePopupName').textContent = firstName;
+            var popup = document.getElementById('guidePopup');
+            popup.style.display = 'flex';
+
+            // Reset button
             var btn = this.querySelector('.submit-btn');
-            btn.textContent = 'Opening Your Guide...';
-            btn.disabled = true;
+            btn.textContent = 'Guide Sent! Click Above to Open';
             btn.style.background = '#28a745';
-
             setTimeout(function() {
-                // Open the Insider Guide in a new tab
-                window.open('TNT-Wine-Tour-Insider-Guide.html', '_blank');
-
-                // Reset form and show confirmation
-                btn.textContent = 'Guide Delivered! Check Your New Tab';
-                setTimeout(function() {
-                    btn.textContent = 'Get My Free Guide Now';
-                    btn.disabled = false;
-                    btn.style.background = '';
-                }, 4000);
-            }, 800);
+                btn.textContent = 'Get My Free Guide Now';
+                btn.style.background = '';
+            }, 5000);
 
             /*
-            JTZ: Replace the localStorage approach above with a real POST:
+            JTZ: Replace localStorage with a real POST:
             fetch('/your-form-handler', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(data)
-            }).then(function() {
-                window.open('TNT-Wine-Tour-Insider-Guide.html', '_blank');
             });
-
-            Or integrate with your existing form system (GHL, Mailchimp, etc.)
-            to capture the lead AND auto-send the guide PDF via email.
             */
+        });
+
+        // Close guide popup when clicking overlay background
+        document.getElementById('guidePopup').addEventListener('click', function(e) {
+            if (e.target === this) this.style.display = 'none';
         });
 
         // Auto-format phone as user types
