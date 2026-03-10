@@ -27,213 +27,35 @@
             color: #856404;
         }
 
-        /* POPUP OVERLAY */
-        .popup-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.6);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 10000;
-            padding: 20px;
+        .demo-note code {
+            background: #f8f0d8;
+            padding: 2px 6px;
+            border-radius: 3px;
         }
 
-        /* POPUP CONTAINER */
-        .popup-container {
-            background: #ffffff;
-            border: 2px solid #CC0000;
-            border-radius: 12px;
-            max-width: 600px;
-            width: 100%;
-            position: relative;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
-            animation: popupSlideIn 0.3s ease-out;
-        }
-
-        @keyframes popupSlideIn {
-            from {
-                transform: translateY(-50px);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-
-        /* CLOSE BUTTON */
-        .popup-close {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: transparent;
-            border: none;
-            color: #666666;
-            font-size: 28px;
-            cursor: pointer;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            transition: all 0.3s;
-        }
-
-        .popup-close:hover {
-            background: #f0f0f0;
-            color: #CC0000;
-        }
-
-        /* POPUP HEADER */
-        .popup-header {
-            text-align: center;
-            padding: 40px 30px 20px;
-            background: #f5f5f5;
-            border-bottom: 1px solid #e0e0e0;
-            border-radius: 12px 12px 0 0;
-        }
-
-        .popup-logo {
-            margin-bottom: 20px;
-        }
-
-        .popup-logo img {
-            height: 60px;
-            width: auto;
-        }
-
-        .popup-title {
-            font-size: 2em;
-            color: #333333;
-            margin-bottom: 10px;
-            font-weight: bold;
-        }
-
-        .popup-subtitle {
-            font-size: 1.1em;
-            color: #555555;
-        }
-
-        /* POPUP CONTENT */
-        .popup-content {
-            padding: 30px;
-        }
-
-        .discount-box {
-            background: #fafafa;
-            border: 1px solid #e0e0e0;
-            border-left: 4px solid #CC0000;
+        /* Dark theme test section */
+        .dark-theme-test {
+            background: #1a1a2e;
+            color: #e0e0e0;
+            padding: 40px 20px;
+            margin: 20px 0;
             border-radius: 8px;
-            padding: 20px;
-            margin-bottom: 25px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-
-        .discount-item {
-            display: flex;
-            align-items: center;
-            padding: 8px 0;
-            color: #333333;
-            font-size: 1.05em;
-        }
-
-        .discount-item:before {
-            content: "\2713";
-            color: #CC0000;
-            font-weight: bold;
-            font-size: 1.3em;
-            margin-right: 12px;
-            flex-shrink: 0;
-        }
-
-        /* BUTTONS */
-        .popup-buttons {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-
-        .popup-btn {
-            padding: 16px 20px;
-            border: none;
-            border-radius: 6px;
-            font-size: 1.05em;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            text-decoration: none;
-            text-align: center;
-            display: block;
-        }
-
-        .popup-btn-primary {
-            background: #CC0000;
+        .dark-theme-test h3 {
             color: #ffffff;
+            margin-top: 0;
         }
-
-        .popup-btn-primary:hover {
-            background: #a30000;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(204, 0, 0, 0.35);
+        .dark-theme-test a {
+            color: #6ec6ff;
         }
-
-        .popup-btn-secondary {
-            background: #ffffff;
-            color: #CC0000;
-            border: 2px solid #CC0000;
-        }
-
-        .popup-btn-secondary:hover {
-            background: #CC0000;
-            color: #ffffff;
-            transform: translateY(-2px);
-        }
-
-        /* FOOTER */
-        .popup-footer {
-            text-align: center;
-            padding: 0 30px 30px;
-            color: #888888;
-            font-size: 0.9em;
-        }
-
-        .popup-footer .dont-show {
-            margin-top: 15px;
+        .dark-theme-test button {
+            background: #333;
+            color: #fff;
+            border: 1px solid #555;
+            padding: 8px 16px;
+            border-radius: 4px;
             cursor: pointer;
-            color: #CC0000;
-            text-decoration: underline;
-        }
-
-        .popup-footer .dont-show:hover {
-            color: #a30000;
-        }
-
-        /* MOBILE */
-        @media (max-width: 600px) {
-            .popup-container {
-                margin: 10px;
-            }
-
-            .popup-title {
-                font-size: 1.5em;
-            }
-
-            .popup-buttons {
-                grid-template-columns: 1fr;
-            }
-
-            .popup-header {
-                padding: 30px 20px 15px;
-            }
-
-            .popup-content {
-                padding: 20px;
-            }
         }
     </style>
 </head>
@@ -243,123 +65,615 @@
         <p><strong>This is a working example</strong> of what the popup should look like on the main TNT website.</p>
         <p>Below you'll see the popup displayed. JTZ can use this as a reference for design and functionality.</p>
         <p><strong>Design Note:</strong> This popup uses the clean, white/light tntlimousine.com brand style with #CC0000 TNT Red accents. It should feel professional, not promotional or flashy.</p>
-        <p><strong>Technical Note:</strong> The popup should trigger 3 seconds after page load or on exit intent. It uses cookies to show only once per 24 hours.</p>
+        <p><strong>Technical Note:</strong> The popup triggers 3 seconds after page load or on exit intent (desktop only). Uses cookies to show only once per 24 hours. On mobile, a slim bottom banner replaces the full popup.</p>
+        <hr>
+        <h3>What's New (v2 - March 2026)</h3>
+        <ul>
+            <li><strong>Mobile:</strong> Phones get a slim bottom banner instead of a full-screen popup</li>
+            <li><strong>Dark Theme Safe:</strong> <code>all: initial</code> + <code>!important</code> on everything — will look correct on any background</li>
+            <li><strong>DO NOT remove <code>!important</code> declarations</strong> — they protect against style inheritance</li>
+        </ul>
+        <hr>
+        <p><strong>Test:</strong></p>
+        <button onclick="window.__wtShowPromo(true)" style="background: #CC0000; color: white; padding: 10px 20px; border: none; border-radius: 6px; cursor: pointer; margin-right: 10px;">Preview Desktop Popup</button>
+        <button onclick="window.__wtShowBanner(true)" style="background: #333; color: white; padding: 10px 20px; border: none; border-radius: 6px; cursor: pointer;">Preview Mobile Banner</button>
     </div>
 
-    <!-- THE ACTUAL POPUP — starts hidden, shown by JS after cookie check -->
-    <div class="popup-overlay" id="winetoursPopup" style="display: none;">
-        <div class="popup-container">
-            <!-- Close Button -->
-            <button class="popup-close" onclick="closePopup()">&times;</button>
+    <!-- Dark theme test area -->
+    <div class="dark-theme-test">
+        <h3>Dark Theme Test Area</h3>
+        <p>This simulates a dark-themed website. The popup/banner should remain white and red regardless of this background.</p>
+        <button onclick="window.__wtShowPromo(true)">Test Popup on Dark Background</button>
+    </div>
 
-            <!-- Header -->
-            <div class="popup-header">
-                <div class="popup-logo">
+    <!-- ====================================== -->
+    <!-- POPUP + BANNER CODE (same as JTZ package) -->
+    <!-- ====================================== -->
+
+    <style>
+        /*
+         * TNT Wine Tours Popup + Mobile Banner
+         * v2 - Dark theme safe, mobile-friendly
+         * All properties use !important to prevent style inheritance
+         */
+
+        /* === RESET: Nuke all inherited styles === */
+        .wt-popup-overlay,
+        .wt-popup-overlay *,
+        .wt-popup-overlay *::before,
+        .wt-popup-overlay *::after,
+        .wt-mobile-banner,
+        .wt-mobile-banner *,
+        .wt-mobile-banner *::before,
+        .wt-mobile-banner *::after {
+            all: initial !important;
+            box-sizing: border-box !important;
+        }
+
+        /* === DESKTOP POPUP === */
+
+        .wt-popup-overlay {
+            display: none !important;
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            width: 100% !important;
+            height: 100% !important;
+            background: rgba(0, 0, 0, 0.6) !important;
+            z-index: 999999 !important;
+            animation: wtFadeIn 0.3s ease-in-out !important;
+            font-family: Arial, Helvetica, sans-serif !important;
+            line-height: 1.5 !important;
+            color: #333333 !important;
+        }
+
+        .wt-popup-overlay.show {
+            display: flex !important;
+            justify-content: center !important;
+            align-items: center !important;
+            padding: 20px !important;
+        }
+
+        .wt-popup {
+            display: block !important;
+            background: #ffffff !important;
+            border: 2px solid #CC0000 !important;
+            max-width: 600px !important;
+            width: 100% !important;
+            border-radius: 12px !important;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2) !important;
+            position: relative !important;
+            animation: wtSlideIn 0.3s ease-out !important;
+            overflow: hidden !important;
+            font-family: Arial, Helvetica, sans-serif !important;
+            line-height: 1.5 !important;
+            color: #333333 !important;
+        }
+
+        .wt-popup-close {
+            position: absolute !important;
+            top: 15px !important;
+            right: 15px !important;
+            background: transparent !important;
+            border: none !important;
+            color: #666666 !important;
+            font-size: 28px !important;
+            width: 40px !important;
+            height: 40px !important;
+            border-radius: 50% !important;
+            cursor: pointer !important;
+            transition: all 0.3s ease !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            line-height: 1 !important;
+            z-index: 10 !important;
+            font-family: Arial, Helvetica, sans-serif !important;
+        }
+
+        .wt-popup-close:hover {
+            background: #f0f0f0 !important;
+            color: #CC0000 !important;
+        }
+
+        .wt-popup-header {
+            display: block !important;
+            text-align: center !important;
+            padding: 40px 30px 20px !important;
+            background: #f5f5f5 !important;
+            border-bottom: 1px solid #e0e0e0 !important;
+            font-family: Arial, Helvetica, sans-serif !important;
+        }
+
+        .wt-popup-logo {
+            display: block !important;
+            margin-bottom: 20px !important;
+            text-align: center !important;
+        }
+
+        .wt-popup-logo img {
+            display: inline-block !important;
+            height: 60px !important;
+            width: auto !important;
+        }
+
+        .wt-popup-header h2 {
+            display: block !important;
+            color: #333333 !important;
+            font-size: 28px !important;
+            margin: 0 0 8px !important;
+            font-weight: 700 !important;
+            font-family: Arial, Helvetica, sans-serif !important;
+            line-height: 1.3 !important;
+            text-align: center !important;
+        }
+
+        .wt-popup-header p {
+            display: block !important;
+            color: #555555 !important;
+            font-size: 16px !important;
+            margin: 0 !important;
+            font-family: Arial, Helvetica, sans-serif !important;
+            line-height: 1.5 !important;
+            text-align: center !important;
+        }
+
+        .wt-popup-body {
+            display: block !important;
+            padding: 30px !important;
+            background: #ffffff !important;
+            font-family: Arial, Helvetica, sans-serif !important;
+        }
+
+        .wt-popup-offer {
+            display: block !important;
+            background: #fafafa !important;
+            border: 1px solid #e0e0e0 !important;
+            border-left: 4px solid #CC0000 !important;
+            border-radius: 8px !important;
+            padding: 20px !important;
+            margin-bottom: 25px !important;
+            font-family: Arial, Helvetica, sans-serif !important;
+        }
+
+        .wt-popup-offer-item {
+            display: flex !important;
+            align-items: center !important;
+            padding: 8px 0 !important;
+            color: #333333 !important;
+            font-size: 15px !important;
+            font-family: Arial, Helvetica, sans-serif !important;
+            line-height: 1.5 !important;
+        }
+
+        .wt-popup-offer-item::before {
+            content: "\2713" !important;
+            color: #CC0000 !important;
+            font-weight: bold !important;
+            font-size: 18px !important;
+            margin-right: 12px !important;
+            flex-shrink: 0 !important;
+            font-family: Arial, Helvetica, sans-serif !important;
+        }
+
+        .wt-popup-buttons {
+            display: grid !important;
+            grid-template-columns: 1fr 1fr !important;
+            gap: 15px !important;
+            margin-bottom: 20px !important;
+        }
+
+        .wt-popup-btn {
+            display: block !important;
+            padding: 16px 20px !important;
+            border: none !important;
+            border-radius: 6px !important;
+            font-size: 15px !important;
+            font-weight: 600 !important;
+            cursor: pointer !important;
+            transition: all 0.3s !important;
+            text-decoration: none !important;
+            text-align: center !important;
+            font-family: Arial, Helvetica, sans-serif !important;
+            line-height: 1.4 !important;
+        }
+
+        .wt-popup-btn-primary {
+            background: #CC0000 !important;
+            color: #ffffff !important;
+        }
+
+        .wt-popup-btn-primary:hover {
+            background: #a30000 !important;
+            transform: translateY(-2px) !important;
+            box-shadow: 0 6px 20px rgba(204, 0, 0, 0.35) !important;
+        }
+
+        .wt-popup-btn-secondary {
+            background: #ffffff !important;
+            color: #CC0000 !important;
+            border: 2px solid #CC0000 !important;
+        }
+
+        .wt-popup-btn-secondary:hover {
+            background: #CC0000 !important;
+            color: #ffffff !important;
+            transform: translateY(-2px) !important;
+        }
+
+        .wt-popup-footer {
+            display: block !important;
+            text-align: center !important;
+            padding: 0 30px 25px !important;
+            background: #ffffff !important;
+            font-family: Arial, Helvetica, sans-serif !important;
+        }
+
+        .wt-popup-footer p {
+            display: block !important;
+            color: #888888 !important;
+            font-size: 13px !important;
+            margin: 0 0 10px !important;
+            font-family: Arial, Helvetica, sans-serif !important;
+            line-height: 1.5 !important;
+            text-align: center !important;
+        }
+
+        .wt-popup-dont-show {
+            display: inline !important;
+            color: #CC0000 !important;
+            text-decoration: underline !important;
+            cursor: pointer !important;
+            font-size: 13px !important;
+            background: none !important;
+            border: none !important;
+            font-family: Arial, Helvetica, sans-serif !important;
+            line-height: 1.5 !important;
+        }
+
+        .wt-popup-dont-show:hover {
+            color: #a30000 !important;
+        }
+
+        @keyframes wtFadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes wtSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* === MOBILE BOTTOM BANNER === */
+
+        .wt-mobile-banner {
+            display: none !important;
+            position: fixed !important;
+            bottom: 0 !important;
+            left: 0 !important;
+            right: 0 !important;
+            background: #ffffff !important;
+            border-top: 3px solid #CC0000 !important;
+            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15) !important;
+            z-index: 999999 !important;
+            padding: 12px 16px !important;
+            font-family: Arial, Helvetica, sans-serif !important;
+            line-height: 1.4 !important;
+            color: #333333 !important;
+            animation: wtSlideUp 0.3s ease-out !important;
+        }
+
+        .wt-mobile-banner.show {
+            display: flex !important;
+            align-items: center !important;
+            justify-content: space-between !important;
+            gap: 12px !important;
+        }
+
+        .wt-banner-text {
+            display: block !important;
+            flex: 1 !important;
+            font-size: 14px !important;
+            color: #333333 !important;
+            font-family: Arial, Helvetica, sans-serif !important;
+            line-height: 1.3 !important;
+        }
+
+        .wt-banner-title {
+            display: block !important;
+            font-weight: 700 !important;
+            font-size: 15px !important;
+            color: #333333 !important;
+            font-family: Arial, Helvetica, sans-serif !important;
+            margin-bottom: 2px !important;
+        }
+
+        .wt-banner-sub {
+            display: block !important;
+            font-size: 13px !important;
+            color: #666666 !important;
+            font-family: Arial, Helvetica, sans-serif !important;
+        }
+
+        .wt-banner-cta {
+            display: inline-block !important;
+            background: #CC0000 !important;
+            color: #ffffff !important;
+            padding: 10px 20px !important;
+            border-radius: 6px !important;
+            font-size: 14px !important;
+            font-weight: 600 !important;
+            text-decoration: none !important;
+            white-space: nowrap !important;
+            cursor: pointer !important;
+            border: none !important;
+            font-family: Arial, Helvetica, sans-serif !important;
+            line-height: 1.4 !important;
+            flex-shrink: 0 !important;
+        }
+
+        .wt-banner-cta:hover {
+            background: #a30000 !important;
+        }
+
+        .wt-banner-close {
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            background: transparent !important;
+            border: none !important;
+            color: #999999 !important;
+            font-size: 22px !important;
+            width: 32px !important;
+            height: 32px !important;
+            cursor: pointer !important;
+            flex-shrink: 0 !important;
+            font-family: Arial, Helvetica, sans-serif !important;
+            line-height: 1 !important;
+            padding: 0 !important;
+        }
+
+        .wt-banner-close:hover {
+            color: #CC0000 !important;
+        }
+
+        @keyframes wtSlideUp {
+            from {
+                opacity: 0;
+                transform: translateY(100%);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* === RESPONSIVE: Hide popup on mobile, hide banner on desktop === */
+
+        @media (max-width: 767px) {
+            .wt-popup-overlay,
+            .wt-popup-overlay.show {
+                display: none !important;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .wt-mobile-banner,
+            .wt-mobile-banner.show {
+                display: none !important;
+            }
+        }
+    </style>
+
+    <!-- Desktop Popup -->
+    <div id="wineTourPopup" class="wt-popup-overlay">
+        <div class="wt-popup">
+            <button class="wt-popup-close" onclick="window.__wtClosePopup()">&times;</button>
+
+            <div class="wt-popup-header">
+                <div class="wt-popup-logo">
                     <!-- JTZ: Replace with actual TNT logo -->
                     <img src="images/tnt-logo.png" alt="TNT Limousine">
                 </div>
-                <h2 class="popup-title">Virginia Wine Tours</h2>
-                <p class="popup-subtitle">Experience Virginia's Award-Winning Wine Country in Luxury</p>
+                <h2>Virginia Wine Tours</h2>
+                <p>Experience Virginia's Award-Winning Wine Country in Luxury</p>
             </div>
 
-            <!-- Content -->
-            <div class="popup-content">
-                <div class="discount-box">
-                    <div class="discount-item">10% OFF Your First Wine Tour</div>
-                    <div class="discount-item">Professional Chauffeur &middot; Luxury Vehicles &middot; Door-to-Door Service</div>
-                    <div class="discount-item">24 Wineries &middot; 5 Curated Routes &middot; Year-Round Availability</div>
+            <div class="wt-popup-body">
+                <div class="wt-popup-offer">
+                    <div class="wt-popup-offer-item">10% OFF Your First Wine Tour</div>
+                    <div class="wt-popup-offer-item">Professional Chauffeur &middot; Luxury Vehicles &middot; Door-to-Door Service</div>
+                    <div class="wt-popup-offer-item">24 Wineries &middot; 5 Curated Routes &middot; Year-Round Availability</div>
                 </div>
 
-                <!-- Buttons -->
-                <div class="popup-buttons">
-                    <a href="landing-page.html#form" class="popup-btn popup-btn-secondary" onclick="closePopup()">
+                <div class="wt-popup-buttons">
+                    <a href="landing-page.html#form" class="wt-popup-btn wt-popup-btn-secondary" onclick="window.__wtHandleGuide(event)">
                         Get Free Wine Tour Guide
                     </a>
-                    <a href="https://www.tntlimousine.com/reservation" class="popup-btn popup-btn-primary" onclick="closePopup()">
+                    <a href="https://www.tntlimousine.com/reservation" class="wt-popup-btn wt-popup-btn-primary" onclick="window.__wtHandleBooking(event)">
                         Book Your Tour Now
                     </a>
                 </div>
             </div>
 
-            <!-- Footer -->
-            <div class="popup-footer">
+            <div class="wt-popup-footer">
                 <p>25+ Years Experience &middot; Locally Owned &amp; Operated</p>
-                <p class="dont-show" onclick="dontShowAgain()">Don't show this again</p>
+                <button class="wt-popup-dont-show" onclick="window.__wtDontShowAgain()">Don't show this again</button>
             </div>
         </div>
     </div>
 
+    <!-- Mobile Bottom Banner -->
+    <div id="wineTourBanner" class="wt-mobile-banner">
+        <div class="wt-banner-text">
+            <span class="wt-banner-title">Virginia Wine Tours - 10% OFF</span>
+            <span class="wt-banner-sub">Luxury chauffeur &middot; 24 wineries</span>
+        </div>
+        <a href="https://www.tntlimousine.com/reservation" class="wt-banner-cta" onclick="window.__wtHandleBooking(event)">Book Now</a>
+        <button class="wt-banner-close" onclick="window.__wtCloseBanner()">&times;</button>
+    </div>
+
     <script>
-        // ===============================================
-        // POPUP FUNCTIONALITY — Cookie-gated, shows once per 24 hours
-        // ===============================================
+        // TNT Wine Tours Popup + Mobile Banner
+        // v2 - IIFE-wrapped, dark-theme safe, mobile-friendly
+        (function() {
+            'use strict';
 
-        var popupShown = false;
+            // ===============================================
+            // CONFIGURATION
+            // ===============================================
 
-        function showPopup() {
-            if (popupShown) return;
-            var popup = document.getElementById('winetoursPopup');
-            popup.style.display = 'flex';
-            popupShown = true;
-            // Set cookie so it won't show again for 24 hours
-            document.cookie = "tnt_winetours_popup=shown; max-age=86400; path=/";
-        }
+            var GUIDE_URL = "landing-page.html#form";
+            var BOOKING_URL = "https://www.tntlimousine.com/reservation";
+            var POPUP_DELAY = 3000;
+            var COOKIE_EXPIRY = 86400;
+            var MOBILE_BREAKPOINT = 768;
 
-        function closePopup() {
-            document.getElementById('winetoursPopup').style.display = 'none';
-        }
+            // ===============================================
+            // FUNCTIONALITY
+            // ===============================================
 
-        function dontShowAgain() {
-            // Set cookie for 30 days instead of 24 hours
-            document.cookie = "tnt_winetours_popup=hidden; max-age=2592000; path=/";
-            closePopup();
-        }
+            var COOKIE_NAME = 'tnt_winetours_popup';
 
-        // Close popup when clicking outside
-        document.getElementById('winetoursPopup').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closePopup();
+            function isMobile() {
+                return window.innerWidth < MOBILE_BREAKPOINT;
             }
-        });
 
-        // Close popup with Escape key
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                closePopup();
+            function hasCookie() {
+                return document.cookie.indexOf(COOKIE_NAME) !== -1;
             }
-        });
 
-        // --- TRIGGER LOGIC ---
-        // Only show if cookie is not set
-        if (document.cookie.indexOf('tnt_winetours_popup') === -1) {
-            // Don't show on mobile (< 500px)
-            if (window.innerWidth >= 500) {
-                // Show after 3 seconds on page load
-                setTimeout(showPopup, 3000);
+            function setCookie(maxAge) {
+                document.cookie = COOKIE_NAME + '=hidden; max-age=' + maxAge + '; path=/';
+            }
 
-                // Also show on exit intent (mouse leaving viewport)
-                document.addEventListener('mouseout', function(e) {
-                    if (e.clientY < 0) {
-                        showPopup();
+            // --- Desktop Popup ---
+
+            function showPopup(force) {
+                if (!force && isMobile()) return;
+                var el = document.getElementById('wineTourPopup');
+                if (el) el.classList.add('show');
+            }
+
+            function closePopup() {
+                var el = document.getElementById('wineTourPopup');
+                if (el) el.classList.remove('show');
+                setCookie(COOKIE_EXPIRY);
+            }
+
+            // --- Mobile Banner ---
+
+            function showBanner(force) {
+                if (!force && !isMobile()) return;
+                var el = document.getElementById('wineTourBanner');
+                if (el) el.classList.add('show');
+            }
+
+            function closeBanner() {
+                var el = document.getElementById('wineTourBanner');
+                if (el) el.classList.remove('show');
+                setCookie(COOKIE_EXPIRY);
+            }
+
+            // --- Shared ---
+
+            function dontShowAgain() {
+                setCookie(2592000); // 30 days
+                closePopup();
+                closeBanner();
+            }
+
+            function showPromo(force) {
+                if (force) {
+                    if (isMobile()) {
+                        showBanner(true);
+                    } else {
+                        showPopup(true);
                     }
+                    return;
+                }
+                if (isMobile()) {
+                    showBanner(false);
+                } else {
+                    showPopup(false);
+                }
+            }
+
+            function handleGuide(event) {
+                if (event) event.preventDefault();
+                setCookie(COOKIE_EXPIRY);
+                window.location.href = GUIDE_URL;
+            }
+
+            function handleBooking(event) {
+                if (event) event.preventDefault();
+                setCookie(COOKIE_EXPIRY);
+                window.location.href = BOOKING_URL;
+            }
+
+            // --- Event Listeners ---
+
+            var popupEl = document.getElementById('wineTourPopup');
+            if (popupEl) {
+                popupEl.addEventListener('click', function(e) {
+                    if (e.target === this) closePopup();
                 });
             }
-        }
 
-        /*
-        ===============================================
-        NOTES FOR JTZ:
-        ===============================================
-        - Cookie "tnt_winetours_popup" prevents re-showing for 24 hours
-        - "Don't show again" sets it for 30 days
-        - Popup does NOT show on mobile (< 500px) — too intrusive
-        - To exclude specific pages (e.g., wine tours page itself):
-          Wrap the trigger logic above in:
-          if (window.location.pathname !== '/wine-tours') { ... }
-        - Promo code: WINETOUR (10% off first wine tour)
-        - "Get Free Guide" button → landing-page.html#form (the lead capture form)
-        - "Book Your Tour Now" → /reservation (the booking page)
-        */
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    closePopup();
+                    closeBanner();
+                }
+            });
+
+            // --- Auto-trigger ---
+
+            if (!hasCookie()) {
+                setTimeout(function() { showPromo(false); }, POPUP_DELAY);
+
+                // Exit-intent (desktop only)
+                if (!isMobile()) {
+                    document.addEventListener('mouseout', function(e) {
+                        if (e.clientY < 0) showPopup(false);
+                    });
+                }
+            }
+
+            // --- Expose minimal API for onclick handlers ---
+            window.__wtClosePopup = closePopup;
+            window.__wtCloseBanner = closeBanner;
+            window.__wtDontShowAgain = dontShowAgain;
+            window.__wtHandleGuide = handleGuide;
+            window.__wtHandleBooking = handleBooking;
+            window.__wtShowPromo = showPromo;
+            window.__wtShowBanner = showBanner;
+
+            /*
+            ===============================================
+            NOTES FOR JTZ:
+            ===============================================
+            - Cookie "tnt_winetours_popup" prevents re-showing for 24 hours
+            - "Don't show again" sets it for 30 days
+            - Mobile (< 768px): shows slim bottom banner instead of popup
+            - Desktop (>= 768px): shows centered popup with exit-intent trigger
+            - All styles use !important + all:initial reset for dark theme safety
+            - To exclude specific pages (e.g., wine tours page itself):
+              Wrap the trigger logic above in:
+              if (window.location.pathname !== '/wine-tours') { ... }
+            - Promo code: WINETOUR (10% off first wine tour)
+            - "Get Free Guide" button → landing-page.html#form
+            - "Book Your Tour Now" → /reservation
+            */
+
+        })();
     </script>
 </body>
 </html>
