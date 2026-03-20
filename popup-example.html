@@ -185,18 +185,6 @@
             font-family: Arial, Helvetica, sans-serif !important;
         }
 
-        .wt-popup-logo {
-            display: block !important;
-            margin-bottom: 20px !important;
-            text-align: center !important;
-        }
-
-        .wt-popup-logo img {
-            display: inline-block !important;
-            height: 60px !important;
-            width: auto !important;
-        }
-
         .wt-popup-header h2 {
             display: block !important;
             color: #333333 !important;
@@ -455,19 +443,89 @@
             }
         }
 
-        /* === RESPONSIVE: Hide popup on mobile, hide banner on desktop === */
+        /* === RESPONSIVE === */
 
+        /* Mobile: hide popup, show banner only */
         @media (max-width: 767px) {
             .wt-popup-overlay,
             .wt-popup-overlay.show {
                 display: none !important;
             }
+
+            /* Fallback: if popup somehow still renders on mobile, make it survivable */
+            .wt-popup {
+                max-width: 95% !important;
+                max-height: 85vh !important;
+                overflow-y: auto !important;
+                border-radius: 10px !important;
+            }
+
+            .wt-popup-close {
+                top: 8px !important;
+                right: 8px !important;
+                width: 44px !important;
+                height: 44px !important;
+                font-size: 32px !important;
+                background: #ffffff !important;
+                border: 2px solid #CC0000 !important;
+                color: #CC0000 !important;
+                z-index: 20 !important;
+            }
+
+            .wt-popup-header {
+                padding: 20px 16px 12px !important;
+            }
+
+            .wt-popup-header h2 {
+                font-size: 20px !important;
+            }
+
+            .wt-popup-header p {
+                font-size: 14px !important;
+            }
+
+            .wt-popup-body {
+                padding: 16px !important;
+            }
+
+            .wt-popup-offer {
+                padding: 12px !important;
+                margin-bottom: 16px !important;
+            }
+
+            .wt-popup-offer-item {
+                font-size: 13px !important;
+                padding: 5px 0 !important;
+            }
+
+            .wt-popup-buttons {
+                grid-template-columns: 1fr !important;
+                gap: 10px !important;
+                margin-bottom: 12px !important;
+            }
+
+            .wt-popup-btn {
+                padding: 14px 16px !important;
+                font-size: 14px !important;
+            }
+
+            .wt-popup-footer {
+                padding: 0 16px 16px !important;
+            }
         }
 
+        /* Desktop: hide banner */
         @media (min-width: 768px) {
             .wt-mobile-banner,
             .wt-mobile-banner.show {
                 display: none !important;
+            }
+        }
+
+        /* Safe area for iOS notch / home bar */
+        @supports (padding-bottom: env(safe-area-inset-bottom)) {
+            .wt-mobile-banner {
+                padding-bottom: calc(12px + env(safe-area-inset-bottom)) !important;
             }
         }
     </style>
@@ -478,10 +536,6 @@
             <button class="wt-popup-close" onclick="window.__wtClosePopup()">&times;</button>
 
             <div class="wt-popup-header">
-                <div class="wt-popup-logo">
-                    <!-- JTZ: Replace with actual TNT logo -->
-                    <img src="images/tnt-logo.png" alt="TNT Limousine">
-                </div>
                 <h2>Virginia Wine Tours</h2>
                 <p>Experience Virginia's Award-Winning Wine Country in Luxury</p>
             </div>
